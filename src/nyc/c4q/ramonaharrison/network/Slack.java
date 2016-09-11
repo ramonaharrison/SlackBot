@@ -30,6 +30,11 @@ public class Slack {
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
+    /**
+     * Static method to test the Slack API.
+     *
+     * @return the Response indicating ok/error or null if the connection failed.
+     */
     public static Response testApi() {
         URL testUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST  + "?token=" + API_KEY);
 
@@ -38,6 +43,11 @@ public class Slack {
         return new Response(object);
     }
 
+    /**
+     * Static method to list all public channels on the Slack team.
+     *
+     * @return the ListChannelsResponse indicating ok/error or null if the connection failed.
+     */
     public static ListChannelsResponse listChannels() {
 
         URL listChannelsUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_CHANNELS + "?token=" + API_KEY);
@@ -45,6 +55,12 @@ public class Slack {
         return new ListChannelsResponse(HTTPS.get(listChannelsUrl));
     }
 
+    /**
+     * Static method to list the last 100 message on a given channel.
+     *
+     * @param  channelId the id of the channel from which to list messages.
+     * @return the ListMessagesResponse indicating ok/error or null if the connection failed.
+     */
     public static ListMessagesResponse listMessages(String channelId) {
 
         URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
@@ -52,6 +68,12 @@ public class Slack {
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
+    /**
+     * Static method to send a message to the #bots channel.
+     *
+     * @param  messageText the message text.
+     * @return the SendMessageResponse indicating ok/error or null if the connection failed.
+     */
     public static SendMessageResponse sendMessage(String messageText) {
 
         try {
@@ -65,12 +87,25 @@ public class Slack {
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
 
+    /**
+     * Static method to send a message with one or more attachments to the #bots channel.
+     *
+     * @param  messageText the message text.
+     * @param  attachments a list of one of more attachments.
+     * @return the SendMessageResponse indicating ok/error or null if the connection failed.
+     */
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
 
         // TODO: implement this method!
         throw new RuntimeException("Method not implemented!");
     }
 
+    /**
+     * Static method to delete an existing message from the #bots channel.
+     *
+     * @param  messageTs the message timestamp.
+     * @return the DeleteMessageResponse indicating ok/error or null if the connection failed.
+     */
     public static DeleteMessageResponse deleteMessage(String messageTs) {
         URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
 
