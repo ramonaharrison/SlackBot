@@ -1,7 +1,5 @@
 # HW Week 3 - SLACK BOT CHALLENGE 🤖 !!!
 <br>
-## Project Overview
-<br>
 A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app. Slack bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can interact with the AccessCode3-3 Slack.
 
 Slack offers three API's for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, our bots will only interact with Slack using the [Web API](https://api.slack.com/web). This API offers methods that we can use to list AccessCode3-3 channels, view message history on a given channel and post messages to the **#bots** channel.
