@@ -24,7 +24,7 @@ The following setup steps only need to be completed **once per team**:
 
     `Attachment.java` and `User.java` files are already provided in the `model` subpackage -- just complete the TODOs. See the `Channel.java` class for an example of how your completed classes should look.
 
-2. Design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the **#bots** channel. See below for some ideas.
+2. In `Bot.java`, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the **#bots** channel. See below for some ideas.
 
 3. Respect the **bot etiquette guidelines**:
     - Bots may only post messages to the **#bots** channel! No direct messages to users or posting to pre-existing channels like #general or #random.
