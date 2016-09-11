@@ -21,7 +21,7 @@ public class Bot {
     }
 
     /**
-     * Sample method: tests the Slack API. If successful, prints "API OK: true" to the console.
+     * Sample method: tests the Slack API. Prints a message indicating success or failure.
      */
     public void testApi() {
         Response apiTest = Slack.testApi();
@@ -29,7 +29,7 @@ public class Bot {
     }
 
     /**
-     * Sample method: prints all public AccessCode3-3 channel names and ids
+     * Sample method: prints all public AccessCode3-3 channel names and ids. Prints an error message on failure.
      */
     public void listChannels() {
         ListChannelsResponse listChannelsResponse = Slack.listChannels();
@@ -47,7 +47,10 @@ public class Bot {
     }
 
     /**
-     * Sample method: prints up to the last 100 messages from the #bots channel
+     * Sample method: prints up to the last 100 messages from a given channel. Prints an error message on failure.
+     * or failure.
+     *
+     * @param channelId id of the given channel.
      */
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
@@ -67,7 +70,9 @@ public class Bot {
     }
 
     /**
-     * Sample method: sends a plain text message to the #bots channel
+     * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
+     *
+     * @param text message text.
      */
     public void sendMessageToBotsChannel(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
@@ -80,7 +85,9 @@ public class Bot {
     }
 
     /**
-     * Sample method: deletes a message from the #bots channel
+     * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.
+     *
+     * @param messageTs unique timestamp of the message to be deleted.
      */
     public void deleteMessageInBotsChannel(String messageTs) {
         DeleteMessageResponse deleteMessageResponse = Slack.deleteMessage(messageTs);

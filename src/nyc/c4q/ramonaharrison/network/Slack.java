@@ -91,12 +91,12 @@ public class Slack {
      * Static method to send a message with one or more attachments to the #bots channel.
      *
      * @param  messageText the message text.
-     * @param  attachments a list of one of more attachments.
+     * @param  attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
 
-        // TODO: implement this method!
+        // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
         throw new RuntimeException("Method not implemented!");
     }
 
