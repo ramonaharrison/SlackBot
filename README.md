@@ -19,7 +19,7 @@ The following setup steps only need to be completed **once per team**:
 
 3. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does. When you are finished, click the "Save Integration" button.
 
-4. **Both team members:** join the #bots channel on Slack so you can see what your bots is up to. 
+4. **Both team members:** join the #bots channel on Slack so you can see what your bot is up to. 
 
 ## Requirements
 1. Form a clear picture of the project requirements. Spend some time reading through:
