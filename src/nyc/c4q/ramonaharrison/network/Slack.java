@@ -27,12 +27,7 @@ public class Slack {
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
-
-    /*
-    * Calls HTTP.get(URL url) to retrieve up to the last 100 messages
-    * from the a channel and returns an ArrayList<Message> containing
-    * the messages in order of oldest to newest.
-    */
+    
     public static Response testApi() {
         URL testUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST  + "?token=" + API_KEY);
 
@@ -41,11 +36,6 @@ public class Slack {
         return new Response(object);
     }
 
-    /*
-     * Calls HTTP.get(URL url) to retrieve up to the last 100 messages
-     * from the a channel and returns an List<Channel> containing
-     * the messages in order of oldest to newest.
-     */
     public static ListChannelsResponse listChannels() {
 
         URL listChannelsUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_CHANNELS + "?token=" + API_KEY);
@@ -53,11 +43,6 @@ public class Slack {
         return new ListChannelsResponse(HTTPS.get(listChannelsUrl));
     }
 
-    /*
-     * Retrieves up to the last 100 messages from the specified channel.
-     * and returns an List<Message> containing
-     * the messages in order of oldest to newest.
-     */
     public static ListMessagesResponse listMessages(String channelId) {
 
         URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
