@@ -1,10 +1,10 @@
 # HW Week 3 - SLACK BOT CHALLENGE 🤖 !!!
 <br>
-A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app. Slack bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can interact with the AccessCode3-3 Slack.
+A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app. Bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can preform simple interactions with the AccessCode3-3 Slack.
 
 ![slack bot example](https://api.slack.com/img/api/guide_bot_user.png)
 
-Slack offers three API's for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, our bots will only interact with Slack using the [Web API](https://api.slack.com/web). This API offers methods that we can use to list AccessCode3-3 channels, view message history on a given channel and post messages to the **#bots** channel.
+Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel and post and delete messages on the AccessCode3-3 **#bots** channel.
 <br>
 ## Setup
 The following setup steps only need to be completed **once per team**:
@@ -19,16 +19,25 @@ The following setup steps only need to be completed **once per team**:
 
 3. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does. When you are finished, click the "Save Integration" button.
 
+4. **Both team members:** join the #bots channel on Slack so you can see what your bots is up to. 
+
 ## Requirements
-1. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object. Each team member should be responsible for parsing at least one of the classes:
+1. Form a clear picture of the project requirements. Spend some time reading through:
+    - This readme doc.
+    - The [Slack Web API docs](https://api.slack.com/web).
+    - The code that has been provided in the `SlackBot` project.
+
+2. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object. Each team member should be responsible for parsing at least one of the classes:
     - [user](https://api.slack.com/types/user) -> User.java
     - [attachment](https://api.slack.com/docs/message-attachments) -> Attachment.java
 
     `Attachment.java` and `User.java` files are already provided in the `model` subpackage -- just complete the TODOs. See the `Channel.java` class for an example of how your completed classes should look.
+    
+3. In `Slack.java`, implement the `sendMessageWithAttachments(String messageText, List<Attachment> attachments)`, which should take in a `String messageText` and a `List<Attachment> attachments` to post to the #bots channel. It should return a `SendMessageResponse`.
 
-2. In `Bot.java`, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the **#bots** channel. See below for some ideas.
+4. In `Bot.java`, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the **#bots** channel. See below for some ideas.
 
-3. Respect the **bot etiquette guidelines**:
+5. Respect the **bot etiquette guidelines**:
     - Bots may only post messages to the **#bots** channel! No direct messages to users or posting to pre-existing channels like #general or #random.
     - No spamming or flooding the channel with messages: bots should post at most one or two messages at a time.
     - Keep it appropriate!
