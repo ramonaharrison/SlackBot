@@ -4,7 +4,7 @@ A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that intera
 
 ![slack bot example](https://api.slack.com/img/api/guide_bot_user.png)
 
-Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel and post and delete messages on the AccessCode3-3 **#bots** channel.
+Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel and post and delete messages on the **#bots** channel.
 <br>
 ## Setup
 The following setup steps only need to be completed **once per team**:
@@ -31,7 +31,7 @@ The following setup steps only need to be completed **once per team**:
     - [user](https://api.slack.com/types/user) -> User.java
     - [attachment](https://api.slack.com/docs/message-attachments) -> Attachment.java
 
-    `Attachment.java` and `User.java` files are already provided in the `model` subpackage -- just complete the TODOs. See the `Channel.java` class for an example of how your completed classes should look.
+    Attachment.java and User.java files are already provided in the `model` subpackage -- just complete the TODOs as marked. See the `Channel.java` class for an example of how your completed classes should look.
     
 3. In `Slack.java`, implement the `sendMessageWithAttachments(String messageText, List<Attachment> attachments)`, which should take in a `String messageText` and a `List<Attachment> attachments` to post to the #bots channel. It should return a `SendMessageResponse`.
 
