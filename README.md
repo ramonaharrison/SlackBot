@@ -4,22 +4,23 @@ A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that intera
 
 ![slack bot example](https://api.slack.com/img/api/guide_bot_user.png)
 
-Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel and post and delete messages on the **#bots** channel.
+Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel, and post and delete messages on the **#bots** channel.
 <br>
 ## Setup
 The following setup steps only need to be completed **once per team**:
+
 1. Fork and clone [this repo](https://github.com/ramonaharrison/SlackBot). Make sure both team members are added as contributors to the forked repo.
 
-1. Go to https://accesscode3-3.slack.com/apps/new/A0F7YS25R-bots. Make sure you are signed into the AccessCode3-3 Slack team. Choose a username for your bot and click the "Add bot integration" button.
+2. Go to https://accesscode3-3.slack.com/apps/new/A0F7YS25R-bots. Make sure you are signed into the AccessCode3-3 Slack team. Choose a username for your bot and click the "Add bot integration" button.
 
-2. Make a note of your **API token**. The token must always be kept in a **safe, secret** place. We will be storing our API keys in the `../SlackBot/api_token.txt` file, which has been added to our `.gitignore` file.
+3. Make a note of your **API token**. The token must always be kept in a **safe, secret** place. We will be storing our API keys in the `../SlackBot/api_token.txt` file, which has been added to our `.gitignore` file.
 
     > Always be careful when sharing API tokens! Be careful to never publish
 > our bot user tokens in any public GitHub code repository.
 
-3. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does. When you are finished, click the "Save Integration" button.
+4. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does. When you are finished, click the "Save Integration" button.
 
-4. **Both team members:** join the #bots channel on Slack so you can see what your bot is up to. 
+5. **Both team members:** join the #bots channel on Slack so you can see what your bot is up to. 
 
 ## Requirements
 1. Form a clear picture of the project requirements. Spend some time reading through:
