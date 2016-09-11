@@ -25,7 +25,7 @@ The following setup steps only need to be completed **once per team**:
 ## Requirements
 1. Form a clear picture of the project requirements. Spend some time reading through:
     - This readme doc.
-    - The [Slack Web API docs](https://api.slack.com/web).
+    - The [Slack Web API docs](https://api.slack.com/web) and [Basic message formatting guidelines](https://api.slack.com/docs/message-formatting).
     - The code that has been provided in the `SlackBot` project.
 
 2. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object. Each team member should be responsible for parsing at least one of the classes:
