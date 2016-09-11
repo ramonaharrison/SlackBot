@@ -4,7 +4,7 @@ A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that intera
 
 ![slack bot example](https://api.slack.com/img/api/guide_bot_user.png)
 
-Slack offers three APIs for developers to interact with their service: the Web API, the Real Time Messaging API and the Events API . For this project, bots will only interact using the [Web API](https://api.slack.com/web). This API offers methods we can use to list AccessCode3-3 channels, view message history on a given channel, and post and delete messages on the **#bots** channel.
+Slack offers three different APIs that developers can use to interact with their service: the Web API, the Real Time Messaging API and the Events API . In this project, bots will only interact using the [Web API](https://api.slack.com/web). The Web API offers methods that can be used to list AccessCode3-3 channels, view message history on a given channel, and post and delete messages on the #bots channel.
 <br>
 ## Setup
 The following setup steps only need to be completed **once per team**:
@@ -26,25 +26,26 @@ The following setup steps only need to be completed **once per team**:
 1. Form a clear picture of the project requirements. Spend some time reading through:
     - This readme doc.
     - The [Slack Web API docs](https://api.slack.com/web) and [Basic message formatting guidelines](https://api.slack.com/docs/message-formatting).
-    - The code that has been provided in the `SlackBot` project.
+    - The code that has been provided in the `SlackBot` project -- particulary the Slack.java class, which provides methods that your bot can use to interact with Slack's Web API.
+    - Use the IntelliJ TODO panel (⌘6) to navigate to each of the project TODOs.
 
 2. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object. Each team member should be responsible for parsing at least one of the classes:
     - [user](https://api.slack.com/types/user) -> User.java
     - [attachment](https://api.slack.com/docs/message-attachments) -> Attachment.java
 
-    Attachment.java and User.java files are already provided in the `model` subpackage -- just complete the TODOs as marked. See the `Channel.java` class for an example of how your completed classes should look.
-    
-3. In `Slack.java`, implement the `sendMessageWithAttachments(String messageText, List<Attachment> attachments)`, which should take in a `String messageText` and a `List<Attachment> attachments` to post to the #bots channel. It should return a `SendMessageResponse`.
+    Attachment.java and User.java files are already provided in the `model` subpackage -- just complete the TODOs as marked. See the Channel.java class for an example of how your completed classes should look.
 
-4. In `Bot.java`, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the **#bots** channel. See below for some ideas.
+3. In Bot.java, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the #bots channel. See below for some ideas.
+
+4. (Optional / Bonus!) In `Slack.java`, implement the `sendMessageWithAttachments(String messageText, List<Attachment> attachments)`, which should take in a `String messageText` and a `List<Attachment> attachments` to post to the #bots channel. It should return a `SendMessageResponse`. If your bot will send messages with attachments, you must implement this method. Read https://api.slack.com/docs/message-attachments to familiarize yourself with how attachment URL parameters should be formatted.
 
 5. Respect the **bot etiquette guidelines**:
-    - Bots may only post messages to the **#bots** channel! No direct messages to users or posting to pre-existing channels like #general or #random.
+    - Bots may only post messages to the #bots channel! No direct messages or posting to pre-existing channels like #general or #random.
     - No spamming or flooding the channel with messages: bots should post at most one or two messages at a time.
-    - Keep it appropriate!
+    - Keep it classroom friendly :)
 
 ## Some bot ideas
-- Pig Latin Bot: looks at the text of the last message that was posted to the channel and re-posts it in [pig latin](https://en.wikipedia.org/wiki/Pig_Latin).
+- Pig Latin Bot: looks at the text of the last message that was posted to the channel and re-posts it in [pig latin](https://en.wikipedia.org/wiki/Pig_Latin) (or rot13!).
 - Random Fact Bot: post a random fact or programming tip from a curated list.
 - Inspirational Image Bot: post a random image link from a selected list of favorite image URLs.
 - Mashup Bot: get and post interesting content from [another API](https://gist.github.com/afeld/4952991).
