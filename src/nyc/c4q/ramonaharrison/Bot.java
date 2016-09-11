@@ -70,7 +70,7 @@ public class Bot {
      * Sample method: sends a plain text message to the #bots channel
      */
     public void sendMessageToBotsChannel(String text) {
-        SendMessageResponse sendMessageResponse = Slack.sendMessageToBotsChannel(text);
+        SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
 
         if (sendMessageResponse.isOk()) {
             System.out.println("Message sent successfully!");
@@ -83,7 +83,7 @@ public class Bot {
      * Sample method: deletes a message from the #bots channel
      */
     public void deleteMessageInBotsChannel(String messageTs) {
-        DeleteMessageResponse deleteMessageResponse = Slack.deleteMessageFromBotsChannel(messageTs);
+        DeleteMessageResponse deleteMessageResponse = Slack.deleteMessage(messageTs);
 
         if (deleteMessageResponse.isOk()) {
             System.out.println("Message deleted successfully!");

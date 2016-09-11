@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison.network;
 
+import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
 import org.json.simple.JSONObject;
@@ -7,6 +8,7 @@ import org.json.simple.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by Ramona Harrison
@@ -27,7 +29,7 @@ public class Slack {
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
-    
+
     public static Response testApi() {
         URL testUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST  + "?token=" + API_KEY);
 
@@ -50,7 +52,7 @@ public class Slack {
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
-    public static SendMessageResponse sendMessageToBotsChannel(String messageText) {
+    public static SendMessageResponse sendMessage(String messageText) {
 
         try {
             messageText = URLEncoder.encode(messageText, "UTF-8");
@@ -63,7 +65,13 @@ public class Slack {
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
 
-    public static DeleteMessageResponse deleteMessageFromBotsChannel(String messageTs) {
+    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
+
+        // TODO: implement this method!
+        throw new RuntimeException("Method not implemented!");
+    }
+
+    public static DeleteMessageResponse deleteMessage(String messageTs) {
         URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
 
         return new DeleteMessageResponse(HTTPS.get(deleteMessageUrl));
