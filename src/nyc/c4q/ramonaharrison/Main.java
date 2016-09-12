@@ -18,7 +18,7 @@ public class Main {
         //myBot.sendMessage("Hello, world!");
 
         // Post a pineapple photo to the #bots channel
-        //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+        // myBot.sendMessageToBotsChannel("http://www.troll.me/images/ancient-aliens-guy/testing-aliens-thumb.jpg");
 
     }
 }
