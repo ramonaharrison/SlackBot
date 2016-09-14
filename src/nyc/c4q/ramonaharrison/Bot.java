@@ -2,9 +2,11 @@ package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +15,85 @@ import java.util.List;
  *
  */
 
+
 public class Bot {
     // TODO: implement your bot logic!
+    public List<String> log = new ArrayList<String>();
+    public List<String> stopLog = new ArrayList<String>();
 
     public Bot() {
 
     }
+
+    //Test methods
+    public void greetings() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of messages object
+        List<Message> messages = listMessagesResponse.getMessages();
+
+        for (Message message : messages){                                                                   //loop through each message
+            if (message.getText().equals("Hi bot")) {                                                       //if a message says "Hello Bot"
+                String logStr = message.getTs() + message.getUser() + message.getText();                    //create a string to store the timestamp + user + message
+
+                if (!log.contains(logStr)) {                                                                //if log doesn't contain message then
+                    sendMessageToBotsChannel("Hello " + getUserFromMessage(message.getUser()) + ".");       //print message
+                    log.add(logStr);                                                                        //add message to log
+                }
+            }
+        }
+
+    }
+
+    public boolean exitUntil(String stopMessage) {
+        Boolean run = true;
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of messages object
+        List<Message> messages = listMessagesResponse.getMessages();
+
+        for (Message message : messages){
+            if (message.getText().equals(stopMessage)) {
+                String logStopStr = message.getTs() + message.getUser() + message.getText();
+
+                if (!stopLog.contains(logStopStr)) {
+                    sendMessageToBotsChannel("Bot terminating...");
+                    stopLog.add(logStopStr);
+                    run = false;
+                    break;
+                }
+            }
+        }
+        return run;
+    }
+
+    public String getUserFromMessage(String userId) {
+        String result = null;
+        ListUsersResponse listUsersResponse = Slack.listUsers(Slack.BOTS_CHANNEL_ID);
+        List<User> users = listUsersResponse.getUsers();
+
+        for (User user : users) {
+            if (userId.equals(user.getId())) {
+                result = user.getName();
+            }
+        }
+        return result;
+    }
+
+    public void listUsers(String channelId) {
+        ListUsersResponse listUsersResponse = Slack.listUsers(channelId);
+
+
+        if (listUsersResponse.isOk()) {
+            List<User> users = listUsersResponse.getUsers();
+
+            System.out.println("\nUsers: ");
+            for (User user : users) {
+                System.out.println();
+                System.out.println("ID: " + user.getId());
+                System.out.println("Name: " + user.getName());
+            }
+        } else {
+            System.err.print("Error listing users: " + listUsersResponse.getError());
+        }
+    }
+
 
     /**
      * Sample method: tests the Slack API. Prints a message indicating success or failure.
