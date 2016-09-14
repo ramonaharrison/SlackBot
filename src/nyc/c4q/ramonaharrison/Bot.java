@@ -8,6 +8,8 @@ import nyc.c4q.ramonaharrison.network.response.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ramona Harrison
@@ -18,52 +20,91 @@ import java.util.List;
 
 public class Bot {
     // TODO: implement your bot logic!
-    public List<String> log = new ArrayList<String>();
-    public List<String> stopLog = new ArrayList<String>();
+    public double startTimeStamp;
+    public List<String> greetingslog = new ArrayList<String>();
+    public List<String> commandsLog = new ArrayList<String>();
 
     public Bot() {
-
+        getLatestTimeStamp();
     }
 
     //Test methods
-    public void greetings() {
+    public void getLatestTimeStamp() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+        startTimeStamp = Double.parseDouble(messages.get(0).getTs());
+    }
+
+    public void start() {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of messages object
         List<Message> messages = listMessagesResponse.getMessages();
 
-        for (Message message : messages){                                                                   //loop through each message
-            if (message.getText().equals("Hi bot")) {                                                       //if a message says "Hello Bot"
-                String logStr = message.getTs() + message.getUser() + message.getText();                    //create a string to store the timestamp + user + message
-
-                if (!log.contains(logStr)) {                                                                //if log doesn't contain message then
-                    sendMessageToBotsChannel("Hello " + getUserFromMessage(message.getUser()) + ".");       //print message
-                    log.add(logStr);                                                                        //add message to log
-                }
-            }
-        }
+        checkCommandList(messages);
+        checkGreetings(messages);
+        checkStopMessage(messages);
 
     }
 
-    public boolean exitUntil(String stopMessage) {
-        Boolean run = true;
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of messages object
-        List<Message> messages = listMessagesResponse.getMessages();
-
+    public void checkStopMessage(List<Message> messages) {
         for (Message message : messages){
-            if (message.getText().equals(stopMessage)) {
-                String logStopStr = message.getTs() + message.getUser() + message.getText();
+            if (message.getText().equals("kill bot")) {
 
-                if (!stopLog.contains(logStopStr)) {
+                if (Double.parseDouble(message.getTs()) >  startTimeStamp) {
                     sendMessageToBotsChannel("Bot terminating...");
-                    stopLog.add(logStopStr);
-                    run = false;
+                    Main.loopBot = false;
                     break;
                 }
             }
         }
-        return run;
     }
 
-    public String getUserFromMessage(String userId) {
+    //LIST OF COMMANDS
+    public void checkCommandList(List<Message> messages) {
+        for (Message message : messages){
+            if (doesMessageContain("\\/nomnombot commands", message)) {
+                String savedLog = message.getTs() + message.getUser() + message.getText();
+
+                if (!commandsLog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
+                    sendMessageToBotsChannel("I can do these following commands:\n/Command 1...\nCommand 2...\nCommand 3...");
+                    commandsLog.add(savedLog);
+                }
+            }
+        }
+    }
+
+    //CHECK GREETINGS
+    public void checkGreetings(List<Message> messages) {
+        for (Message message : messages){                                                                   //loop through each message
+            if (doesMessageContain("hi bot", message)) {                                                       //if a message says "Hello Bot"
+                String savedLog = message.getTs() + message.getUser() + message.getText();                    //create a string to store the timestamp + user + message
+
+                if (!greetingslog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
+                    sendMessageToBotsChannel("Hello " + getUserNameFromMessage(message.getUser()) + ".");   //print message
+                    greetingslog.add(savedLog);                                                                        //add message to log
+                }
+            }
+        }
+    }
+    //FOOD RIDDLES
+
+    //RECIPES
+
+    //GUESS WHAT I'M GIPHYING
+
+    public boolean doesMessageContain(String str, Message message) {
+
+        boolean found = false;
+        String regex = "(" + str +")";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher r = p.matcher(message.getText());
+
+        if(r.find())
+            found = true;
+
+        return found;
+    }
+
+    public String getUserNameFromMessage(String userId) {
         String result = null;
         ListUsersResponse listUsersResponse = Slack.listUsers(Slack.BOTS_CHANNEL_ID);
         List<User> users = listUsersResponse.getUsers();

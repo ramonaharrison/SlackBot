@@ -4,22 +4,22 @@ import nyc.c4q.ramonaharrison.network.Slack;
 
 public class Main {
 
+    public static boolean loopBot = true;
+
     public static void main(String[] args) {
 
         Bot myBot = new Bot();
-/*
-        boolean loop = true;
-        while (loop) {
-            myBot.greetings();
-            loop = myBot.exitUntil("kill bot");
+
+        while (loopBot) {
+            myBot.start();
         }
-*/
+
         //myBot.testApi();
 
         //myBot.listChannels();
 
         //myBot.listUsers(Slack.BOTS_CHANNEL_ID);
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+        //myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
         // Post "Hello, world!" to the #bots channel
         //myBot.sendMessage("Hello, world!");
