@@ -9,10 +9,9 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a message attachment.
  * See https://api.slack.com/docs/message-attachments
- *
  */
 
 public class Attachment {
@@ -48,7 +47,7 @@ public class Attachment {
         }
 
         if (json.containsKey("pretext")) {
-            this.pretext= (String) json.get("pretext");
+            this.pretext = (String) json.get("pretext");
         }
 
         if (json.containsKey("author_name")) {
