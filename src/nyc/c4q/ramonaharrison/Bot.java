@@ -36,8 +36,8 @@ public class Bot {
     }
 
     public void start() {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of messages object
-        List<Message> messages = listMessagesResponse.getMessages();
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of Message object
+        List<Message> messages = listMessagesResponse.getMessages();                           //return list to messages
 
         checkCommandList(messages);
         checkGreetings(messages);
@@ -47,10 +47,10 @@ public class Bot {
 
     public void checkStopMessage(List<Message> messages) {
         for (Message message : messages){
-            if (doesMessageContain("kill bot", message)) {
+            if (doesMessageContain("kill cookiebot", message)) {
 
                 if (Double.parseDouble(message.getTs()) >  startTimeStamp) {
-                    sendMessageToBotsChannel("Bot going to junkyard...");
+                    sendMessageToBotsChannel("cookieBot eating itself away...");
                     Main.loopBot = false;
                     break;
                 }
@@ -61,11 +61,11 @@ public class Bot {
     //LIST OF COMMANDS
     public void checkCommandList(List<Message> messages) {
         for (Message message : messages){
-            if (doesMessageContain("nomnombot commands", message)) {
+            if (doesMessageContain("cookiebot commands", message)) {
                 String savedLog = message.getTs() + message.getUser() + message.getText();
 
                 if (!commandsLog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
-                    sendMessageToBotsChannel("I can do these following commands:\n/Command 1...\nCommand 2...\nCommand 3...");
+                    sendMessageToBotsChannel("cookie commands:\n/Command 1...\nCommand 2...\nCommand 3...");
                     commandsLog.add(savedLog);
                 }
             }
@@ -74,13 +74,13 @@ public class Bot {
 
     //CHECK GREETINGS
     public void checkGreetings(List<Message> messages) {
-        for (Message message : messages){                                                                   //loop through each message
-            if (doesMessageContain("hi bot", message)) {                                                       //if a message says "Hello Bot"
-                String savedLog = message.getTs() + message.getUser() + message.getText();                    //create a string to store the timestamp + user + message
+        for (Message message : messages){                                                                         //loop through each message
+            if (doesMessageContain("hi cookiebot", message)) {                                                    //if a message says "Hi cookiebot"
+                String savedLog = message.getTs() + message.getUser() + message.getText();                        //create a string to store the timestamp + user + message
 
                 if (!greetingslog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
-                    sendMessageToBotsChannel("Hello " + getUserNameFromMessage(message.getUser()) + ".");   //print message
-                    greetingslog.add(savedLog);                                                                        //add message to log
+                    sendMessageToBotsChannel("Hello @" + getUserNameFromMessage(message.getUser()) + ". Take a cookie.");   //print message
+                    greetingslog.add(savedLog);                                                                             //add message to log
                 }
             }
         }
@@ -91,6 +91,7 @@ public class Bot {
 
     //GUESS WHAT I'M GIPHYING
 
+    //USING REGEX TO MATCH TEXT
     public boolean doesMessageContain(String str, Message message) {
 
         boolean found = false;
@@ -103,7 +104,7 @@ public class Bot {
 
         return found;
     }
-
+    //helper method to get user name from messages
     public String getUserNameFromMessage(String userId) {
         String result = null;
         ListUsersResponse listUsersResponse = Slack.listUsers(Slack.BOTS_CHANNEL_ID);
@@ -116,10 +117,9 @@ public class Bot {
         }
         return result;
     }
-
+    
     public void listUsers(String channelId) {
         ListUsersResponse listUsersResponse = Slack.listUsers(channelId);
-
 
         if (listUsersResponse.isOk()) {
             List<User> users = listUsersResponse.getUsers();
