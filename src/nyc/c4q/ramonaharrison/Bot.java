@@ -47,10 +47,10 @@ public class Bot {
 
     public void checkStopMessage(List<Message> messages) {
         for (Message message : messages){
-            if (message.getText().equals("kill bot")) {
+            if (doesMessageContain("kill bot", message)) {
 
                 if (Double.parseDouble(message.getTs()) >  startTimeStamp) {
-                    sendMessageToBotsChannel("Bot terminating...");
+                    sendMessageToBotsChannel("Bot going to junkyard...");
                     Main.loopBot = false;
                     break;
                 }
@@ -61,7 +61,7 @@ public class Bot {
     //LIST OF COMMANDS
     public void checkCommandList(List<Message> messages) {
         for (Message message : messages){
-            if (doesMessageContain("\\/nomnombot commands", message)) {
+            if (doesMessageContain("nomnombot commands", message)) {
                 String savedLog = message.getTs() + message.getUser() + message.getText();
 
                 if (!commandsLog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
