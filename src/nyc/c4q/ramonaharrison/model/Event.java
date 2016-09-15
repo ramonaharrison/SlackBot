@@ -34,6 +34,7 @@ public class Event {
 
     @Override
     public String toString() {
+
         String year = getYear();
         String text = getText();
         String complete = year + ": \n" + text + "\n";

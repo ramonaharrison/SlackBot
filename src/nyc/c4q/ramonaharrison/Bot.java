@@ -100,6 +100,6 @@ public class Bot {
     }
 
     public void getEvents (){
-        System.out.println((TodayInHistory.getTodayInHistory().getEvents().toString()));
+        sendMessageToBotsChannel(TodayInHistory.getTodayInHistory().getEvents().toString());
     }
 }
