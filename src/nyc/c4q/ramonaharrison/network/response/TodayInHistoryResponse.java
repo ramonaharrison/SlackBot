@@ -17,13 +17,18 @@ public class TodayInHistoryResponse {
 
     public TodayInHistoryResponse(JSONObject json) {
 
-        if (json.containsKey("event")) {
-            JSONArray array = (JSONArray) json.get("event");
+        if (json.containsKey("data")) {
+            json = (JSONObject) json.get("data");
 
-            this.events = new ArrayList<Event>();
-            for (int i = 0; i < array.size(); i++) {
-                this.events.add(new Event((JSONObject) array.get(i)));
+            if (json.containsKey("Events")) {
+                JSONArray array = (JSONArray) json.get("Events");
+
+                this.events = new ArrayList<Event>();
+                for (int i = 0; i < array.size(); i++) {
+                    this.events.add(new Event((JSONObject) array.get(i)));
+                }
             }
+
         }
     }
 
