@@ -5,6 +5,7 @@ import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+import nyc.c4q.ramonaharrison.cleverbot.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,79 +18,115 @@ import java.util.regex.Pattern;
  *
  */
 
-
 public class Bot {
     // TODO: implement your bot logic!
     public double startTimeStamp;
     public List<String> greetingslog = new ArrayList<String>();
     public List<String> commandsLog = new ArrayList<String>();
+    public List<String> cleverbotLog = new ArrayList<>();
+    public List<String> recipesLog = new ArrayList<>();
 
     public Bot() {
         getLatestTimeStamp();
+        sendMessageToBotsChannel("Hi guys, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
+        //1.CREATE INSTANCE OF CLEVERBOT
+        //Cleverbot.createInstance(); //instance already created
     }
 
-    //Test methods
     public void getLatestTimeStamp() {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID);
         List<Message> messages = listMessagesResponse.getMessages();
         startTimeStamp = Double.parseDouble(messages.get(0).getTs());
     }
 
     public void start() {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of Message object
-        List<Message> messages = listMessagesResponse.getMessages();                           //return list to messages
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID); //get list of Message object
+        List<Message> messages = listMessagesResponse.getMessages();                              //return list to messages
 
-        checkCommandList(messages);
-        checkGreetings(messages);
-        checkStopMessage(messages);
-
+        goThroughTheseStatements(messages);
     }
 
-    public void checkStopMessage(List<Message> messages) {
-        for (Message message : messages){
-            if (doesMessageContain("kill cookiebot", message)) {
+    public void goThroughTheseStatements(List<Message> messages) {
+        for (Message message : messages) {
+            //if the text matches and timestamp is > the latest timestamp and the message isn't from a bot
+            if (doesMessageContain("cookiebot", message) && Double.parseDouble(message.getTs()) >  startTimeStamp && message.getUser() != null) {
 
-                if (Double.parseDouble(message.getTs()) >  startTimeStamp) {
-                    sendMessageToBotsChannel("cookieBot eating itself away...");
-                    Main.loopBot = false;
+                if (doesMessageContain("cookiebot die", message)) {
+                    checkStopMessage(message);
                     break;
                 }
+                else if (doesMessageContain("cookiebot hi", message) || doesMessageContain("cookiebot hello", message)) {
+                    checkGreetings(message);
+                }
+                else if (doesMessageContain("cookiebot recipes", message)) {
+                    checkRecipes(message);
+                }
+                else if (doesMessageContain("cookiebot commands", message)) {
+                    checkCommands(message);
+                }
+                else {
+                    convoWithCleverbot(message);
+                }
             }
+        }
+    }
+
+    //TERMINATE BOT
+    public void checkStopMessage(Message message) {
+        sendMessageToBotsChannel("cookiebot eating itself away...");
+        Main.loopBot = false;
+    }
+
+    //CHECK GREETINGS
+    public void checkGreetings(Message message) {
+        String savedLog = message.getTs() + message.getUser() + message.getText();
+        if (!greetingslog.contains(savedLog)) {
+            sendMessageToBotsChannel("Hello @" + getUserNameFromMessage(message.getUser()) + ". Take a cookie.");
+            greetingslog.add(savedLog);
         }
     }
 
     //LIST OF COMMANDS
-    public void checkCommandList(List<Message> messages) {
-        for (Message message : messages){
-            if (doesMessageContain("cookiebot commands", message)) {
-                String savedLog = message.getTs() + message.getUser() + message.getText();
-
-                if (!commandsLog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
-                    sendMessageToBotsChannel("cookie commands:\n/Command 1...\nCommand 2...\nCommand 3...");
-                    commandsLog.add(savedLog);
-                }
-            }
+    public void checkCommands(Message message) {
+        String savedLog = message.getTs() + message.getUser() + message.getText();
+        if (!commandsLog.contains(savedLog)) {                                                                //if log doesn't contain message then
+            sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot games\ncookiebot giphy\n...");
+            commandsLog.add(savedLog);
         }
     }
 
-    //CHECK GREETINGS
-    public void checkGreetings(List<Message> messages) {
-        for (Message message : messages){                                                                         //loop through each message
-            if (doesMessageContain("hi cookiebot", message)) {                                                    //if a message says "Hi cookiebot"
-                String savedLog = message.getTs() + message.getUser() + message.getText();                        //create a string to store the timestamp + user + message
-
-                if (!greetingslog.contains(savedLog) && Double.parseDouble(message.getTs()) >  startTimeStamp) {                                                                //if log doesn't contain message then
-                    sendMessageToBotsChannel("Hello @" + getUserNameFromMessage(message.getUser()) + ". Take a cookie.");   //print message
-                    greetingslog.add(savedLog);                                                                             //add message to log
-                }
-            }
+    //CONVERSE WITH CLEVERBOT
+    public void convoWithCleverbot(Message message) {
+        String savedLog = message.getTs() + message.getUser() + message.getText();
+        if (!cleverbotLog.contains(savedLog)) {
+            //get text after cookiebot "____", then send that text over to Cleverbot class to get a response from Cleverbot
+            sendMessageToBotsChannel(Cleverbot.sendMessage(getTextAfterCookiebot(message)));
+            cleverbotLog.add(savedLog);
         }
     }
-    //FOOD RIDDLES
 
     //RECIPES
+    public void checkRecipes(Message message) {
+        String savedLog = message.getTs() + message.getUser() + message.getText();
+        if (!recipesLog.contains(savedLog)) {
+            sendMessageToBotsChannel("TODO Recipes...");
+            recipesLog.add(savedLog);
+        }
+    }
 
     //GUESS WHAT I'M GIPHYING
+
+    //-------------- HELPER METHODS BELOW ---------------
+    //USING REGEX TO MATCH TEXT AFTER cookiebot "____"
+    public String getTextAfterCookiebot(Message message) {
+        String result = "";
+        String regex = "((?<=cookiebot ).*)";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher r = p.matcher(message.getText());
+        if(r.find())
+            result = result + r.group(0);
+        return result;
+    }
 
     //USING REGEX TO MATCH TEXT
     public boolean doesMessageContain(String str, Message message) {
@@ -104,10 +141,11 @@ public class Bot {
 
         return found;
     }
-    //helper method to get user name from messages
+
+    //get user name from message
     public String getUserNameFromMessage(String userId) {
         String result = null;
-        ListUsersResponse listUsersResponse = Slack.listUsers(Slack.BOTS_CHANNEL_ID);
+        ListUsersResponse listUsersResponse = Slack.listUsers(Slack.PRIVATE_CHANNEL_ID);
         List<User> users = listUsersResponse.getUsers();
 
         for (User user : users) {
@@ -117,7 +155,7 @@ public class Bot {
         }
         return result;
     }
-    
+
     public void listUsers(String channelId) {
         ListUsersResponse listUsersResponse = Slack.listUsers(channelId);
 
@@ -134,7 +172,6 @@ public class Bot {
             System.err.print("Error listing users: " + listUsersResponse.getError());
         }
     }
-
 
     /**
      * Sample method: tests the Slack API. Prints a message indicating success or failure.

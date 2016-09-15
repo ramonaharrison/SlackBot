@@ -25,11 +25,16 @@ public class Slack {
     private static final String ENDPOINT_TEST = "api.test";
     private static final String ENDPOINT_LIST_USERS = "users.list";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
-    private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
+    private static final String ENDPOINT_LIST_MESSAGES = "groups.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
-    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    //icon and name
+    private static final String USERNAME = "cookiebot";
+    private static final String ICON_EMOJI = ":cookie:";
+
+    //public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String PRIVATE_CHANNEL_ID = "G2C31NYLE";
 
     /**
      * Static method to test the Slack API.
@@ -95,7 +100,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + PRIVATE_CHANNEL_ID + "&text=" + messageText + "&username=" + USERNAME + "&icon_emoji=" + ICON_EMOJI);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
@@ -120,7 +125,7 @@ public class Slack {
      * @return the DeleteMessageResponse indicating ok/error or null if the connection failed.
      */
     public static DeleteMessageResponse deleteMessage(String messageTs) {
-        URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
+        URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + PRIVATE_CHANNEL_ID + "&ts=" + messageTs);
 
         return new DeleteMessageResponse(HTTPS.get(deleteMessageUrl));
     }
