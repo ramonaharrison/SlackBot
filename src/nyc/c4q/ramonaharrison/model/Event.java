@@ -37,7 +37,7 @@ public class Event {
 
         String year = getYear();
         String text = getText();
-        String complete = year + ": \n" + text + "\n";
+        String complete = "On this day in " + year + ": \n" + text + "\n";
 
         return complete;
     }

@@ -99,7 +99,7 @@ public class Bot {
         }
     }
 
-    public void getEvents (){
-        sendMessageToBotsChannel(TodayInHistory.getTodayInHistory().getEvents().toString());
+    public void getAnEvent (){
+        sendMessageToBotsChannel(TodayInHistory.getTodayInHistory().getRandomEvent().toString());
     }
 }

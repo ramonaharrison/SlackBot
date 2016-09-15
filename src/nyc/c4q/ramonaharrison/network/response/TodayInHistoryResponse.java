@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TodayInHistoryResponse {
 
@@ -34,5 +35,11 @@ public class TodayInHistoryResponse {
 
     public List<Event> getEvents() {
         return events;
+    }
+
+    public Event getRandomEvent() {
+        Random random = new Random();
+
+        return events.get(random.nextInt(events.size()));
     }
 }
