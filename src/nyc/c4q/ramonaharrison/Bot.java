@@ -7,6 +7,8 @@ import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.cleverbot.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -21,14 +23,18 @@ import java.util.regex.Pattern;
 public class Bot {
     // TODO: implement your bot logic!
     public double startTimeStamp;
-    public List<String> greetingslog = new ArrayList<String>();
+    /*public List<String> greetingslog = new ArrayList<String>();
     public List<String> commandsLog = new ArrayList<String>();
     public List<String> cleverbotLog = new ArrayList<>();
     public List<String> recipesLog = new ArrayList<>();
+    public List<String> foodItemLog = new ArrayList<>();*/
+
+    public List<String> log = new ArrayList<>();
+
 
     public Bot() {
         getLatestTimeStamp();
-        sendMessageToBotsChannel("Hi guys, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
+       // sendMessageToBotsChannel("Hi <!everyone>, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
         //1.CREATE INSTANCE OF CLEVERBOT
         //Cleverbot.createInstance(); //instance already created
     }
@@ -49,23 +55,26 @@ public class Bot {
     public void goThroughTheseStatements(List<Message> messages) {
         for (Message message : messages) {
             //if the text matches and timestamp is > the latest timestamp and the message isn't from a bot
-            if (doesMessageContain("cookiebot", message) && Double.parseDouble(message.getTs()) >  startTimeStamp && message.getUser() != null) {
+            if (doesMessageContain("cookiebot", message)
+                    && Double.parseDouble(message.getTs()) >  startTimeStamp
+                    && message.getUser() != null) {
 
-                if (doesMessageContain("cookiebot die", message)) {
-                    checkStopMessage(message);
-                    break;
-                }
-                else if (doesMessageContain("cookiebot hi", message) || doesMessageContain("cookiebot hello", message)) {
-                    checkGreetings(message);
-                }
-                else if (doesMessageContain("cookiebot recipes", message)) {
-                    checkRecipes(message);
-                }
-                else if (doesMessageContain("cookiebot commands", message)) {
-                    checkCommands(message);
-                }
-                else {
-                    convoWithCleverbot(message);
+                String savedLog = message.getTs() + message.getUser() + message.getText();
+
+                if (!log.contains(savedLog)) {
+
+                    if (doesMessageContain("cookiebot die", message)) {
+                        checkStopMessage(message);
+                        break;
+                    } else if (doesMessageContain("cookiebot hi", message) || doesMessageContain("cookiebot hello", message)) {
+                        checkGreetings(message, savedLog);
+                    } else if (doesMessageContain("cookiebot recipes", message)) {
+                        checkRecipes(message, savedLog);
+                    } else if (doesMessageContain("cookiebot commands", message)) {
+                        checkCommands(message, savedLog);
+                    } else {
+                        convoWithCleverbot(message, savedLog);
+                    }
                 }
             }
         }
@@ -78,40 +87,76 @@ public class Bot {
     }
 
     //CHECK GREETINGS
-    public void checkGreetings(Message message) {
-        String savedLog = message.getTs() + message.getUser() + message.getText();
-        if (!greetingslog.contains(savedLog)) {
-            sendMessageToBotsChannel("Hello @" + getUserNameFromMessage(message.getUser()) + ". Take a cookie.");
-            greetingslog.add(savedLog);
-        }
+    public void checkGreetings(Message message, String savedLog) {
+            sendMessageToBotsChannel("Hello <@" + message.getUser() + ">. Take a cookie.");
+            log.add(savedLog);
+
     }
 
     //LIST OF COMMANDS
-    public void checkCommands(Message message) {
-        String savedLog = message.getTs() + message.getUser() + message.getText();
-        if (!commandsLog.contains(savedLog)) {                                                                //if log doesn't contain message then
+    public void checkCommands(Message message, String savedLog) {                                                            //if log doesn't contain message then
             sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot games\ncookiebot giphy\n...");
-            commandsLog.add(savedLog);
-        }
+            log.add(savedLog);
+
     }
 
     //CONVERSE WITH CLEVERBOT
-    public void convoWithCleverbot(Message message) {
-        String savedLog = message.getTs() + message.getUser() + message.getText();
-        if (!cleverbotLog.contains(savedLog)) {
+    public void convoWithCleverbot(Message message, String savedLog) {
             //get text after cookiebot "____", then send that text over to Cleverbot class to get a response from Cleverbot
             sendMessageToBotsChannel(Cleverbot.sendMessage(getTextAfterCookiebot(message)));
-            cleverbotLog.add(savedLog);
-        }
+            log.add(savedLog);
+
     }
 
     //RECIPES
-    public void checkRecipes(Message message) {
-        String savedLog = message.getTs() + message.getUser() + message.getText();
-        if (!recipesLog.contains(savedLog)) {
-            sendMessageToBotsChannel("TODO Recipes...");
-            recipesLog.add(savedLog);
+    public void checkRecipes(Message message, String savedLog) {
+        boolean waitingForRequest = true;
+        sendMessageToBotsChannel("What do you want to make?");
+        log.add(savedLog);
+        while (waitingForRequest) {
+            waitingForRequest = checkFoodItems(message);
         }
+    }
+
+    public boolean checkFoodItems(Message messageFromThisUser) {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+
+        for (Message message : messages) {
+            if (doesMessageContain("cookiebot", message)
+                    && message.getUser() != null
+                    && message.getUser().equals(messageFromThisUser.getUser()) //if message is from this user
+                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromThisUser.getTs())) { //if message timestamp is > this users timestamp when he called cookiebot recipes
+
+                String savedLog = message.getTs() + message.getUser() + message.getText();
+
+                if (!log.contains(savedLog)) {
+
+                    String messageText = getTextAfterCookiebot(message);
+                    try {
+                        messageText = URLEncoder.encode(messageText, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    sendMessageToBotsChannel("<http://www.google.com/search?q=recipes+" + messageText + "&unfurl_links=true&btnI|" + getTextAfterCookiebot(message) + " recipe!>");
+                    log.add(savedLog);
+                    return false;
+                }
+            }
+            else if (doesMessageContain("cookiebot", message)
+                    && message.getUser() != null
+                    && !message.getUser().equals(messageFromThisUser.getUser()) //if message is from this user
+                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromThisUser.getTs())) {
+
+                String savedLog = message.getTs() + message.getUser() + message.getText();
+                if (!log.contains(savedLog)) {
+                    sendMessageToBotsChannel("<@" + message.getUser() + ">. I'm sorry please wait your turn :)");
+                    log.add(savedLog);
+                }
+            }
+        }
+        return true;
     }
 
     //GUESS WHAT I'M GIPHYING

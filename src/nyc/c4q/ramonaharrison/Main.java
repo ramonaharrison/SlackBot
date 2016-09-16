@@ -10,11 +10,11 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         Bot myBot = new Bot();
-
+/*
         while (loopBot) {
             myBot.start();
         }
-
+*/
         //myBot.testApi();
 
         //myBot.listChannels();
@@ -23,7 +23,7 @@ public class Main {
        // myBot.listMessages(Slack.PRIVATE_CHANNEL_ID);
 
         // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessageToBotsChannel("Hello, world!");
+        myBot.sendMessageToBotsChannel("http://imgs.xkcd.com/comics/regex_golf.png");
 
         // Post a pineapple photo to the #bots channel
         //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
