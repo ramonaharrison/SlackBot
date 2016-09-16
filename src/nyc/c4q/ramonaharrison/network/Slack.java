@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison.network;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
@@ -9,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
+//import org.apache.commons.codec.binary.Hex;
 
 /**
  * Created by Ramona Harrison
@@ -29,6 +31,8 @@ public class Slack {
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String BOTSTEST_CHANNEL_ID = "C2ATALHQQ";
+
 
     /**
      * Static method to test the Slack API.
@@ -68,6 +72,13 @@ public class Slack {
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
+    public static ListUsers listUsers(String channelId) {
+
+        URL listUsersUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
+
+        return new ListUsers(HTTPS.get(listUsersUrl));
+    }
+
     /**
      * Static method to send a message to the #bots channel.
      *
@@ -82,7 +93,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTSTEST_CHANNEL_ID + "&text=" + messageText);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
@@ -90,14 +101,27 @@ public class Slack {
     /**
      * Static method to send a message with one or more attachments to the #bots channel.
      *
-     * @param  messageText the message text.
-     * @param  attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
+     * @param  //messageText the message text.
+     * @param  //attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
-    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
+    public static SendMessageResponse sendMessageWithAttachments( JSONObject obj) throws UnsupportedEncodingException {
+
+        String attachment =obj.toJSONString();
+
+        //try {
+            String messageText = URLEncoder.encode(attachment);
+
+//        } catch (UnsupportedEncodingException e) {
+//            throw new RuntimeException(e);
+//        }
+        //System.out.println(messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTSTEST_CHANNEL_ID + "&text="+ "Text"+"&attachments=" + messageText );
+
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
 
         // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
-        throw new RuntimeException("Method not implemented!");
+        //throw new RuntimeException("Method not implemented!");
     }
 
     /**
