@@ -23,29 +23,24 @@ import java.util.regex.Pattern;
 public class Bot {
     // TODO: implement your bot logic!
     public double startTimeStamp;
-    /*public List<String> greetingslog = new ArrayList<String>();
-    public List<String> commandsLog = new ArrayList<String>();
-    public List<String> cleverbotLog = new ArrayList<>();
-    public List<String> recipesLog = new ArrayList<>();
-    public List<String> foodItemLog = new ArrayList<>();*/
 
     public List<String> log = new ArrayList<>();
 
     public Bot() {
         getLatestTimeStamp();
-       // sendMessageToBotsChannel("Hi <!everyone>, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
-        //1.CREATE INSTANCE OF CLEVERBOT
+        sendMessageToBotsChannel("Hi <!everyone>, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
+        //1.CREATE INSTANCE OF CLEVERBOT //only allowed 1000 calls to cleverbot api per day
         //Cleverbot.createInstance(); //instance already created
     }
 
     public void getLatestTimeStamp() {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID);
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
         List<Message> messages = listMessagesResponse.getMessages();
         startTimeStamp = Double.parseDouble(messages.get(0).getTs());
     }
 
     public void start() {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID); //get list of Message object
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID); //get list of Message object
         List<Message> messages = listMessagesResponse.getMessages();                              //return list to messages
 
         goThroughTheseStatements(messages);
@@ -72,7 +67,11 @@ public class Bot {
                     } else if (doesMessageContain("cookiebot commands", message)) {
                         checkCommands(message, savedLog);
                     } else if (doesMessageContain("cookiebot pic", message)) {
-                            checkPics(message, savedLog);
+                        checkPics(message, savedLog);
+                    } else if (doesMessageContain("cookiebot random", message)) {
+                        randomResponse(message, savedLog);
+                    }else if (doesMessageContain("cookie monster", message)){
+                        checkMonster(message, savedLog);
                     } else {
                         convoWithCleverbot(message, savedLog);
                     }
@@ -96,7 +95,7 @@ public class Bot {
 
     //LIST OF COMMANDS
     public void checkCommands(Message message, String savedLog) {                                                            //if log doesn't contain message then
-        sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot pic\n...");
+        sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot random\ncookiebot pic\ncookiebot cookie monster\n...");
         log.add(savedLog);
 
     }
@@ -120,7 +119,7 @@ public class Bot {
     }
 
     public boolean requestingRecipe(Message messageFromRequestingUser) {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID);
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
         List<Message> messages = listMessagesResponse.getMessages();
 
         for (Message message : messages) {
@@ -161,10 +160,99 @@ public class Bot {
     }
 
     public void checkPics(Message message, String savedLog) {
-        sendMessageToBotsChannel("Picture of the most delicious food in the world.");
+        sendMessageToBotsChannel("<http://i.imgur.com/AJuCnm2.jpg|Most delicious food in the world.>");
         log.add(savedLog);
     }
-    //GUESS WHAT I'M GIPHYING
+
+    public void randomResponse(Message message, String savedLog) {
+            int random = (int) (Math.random() * 22 + 1); //1-22
+            String sassyResponse;
+
+
+            switch (random) {
+                case 1:
+                    sassyResponse = "Ain't nobody got time for that... cookie roll away.";
+                    break;
+                case 2:
+                    sassyResponse = "We cookies are a proud race.";
+                    break;
+                case 3:
+                    sassyResponse = "Did you know Oreo was introduced in 1912, and sell $550 million annually.";
+                    break;
+                case 4:
+                    sassyResponse = "The first fortune cookie was made in America.";
+                    break;
+                case 5:
+                    sassyResponse = "Cookies have feelings too!";
+                    break;
+                case 6:
+                    sassyResponse = "December 4th is National Cookie Day, respect.";
+                    break;
+                case 7:
+                    sassyResponse = "Americans run on cookies.";
+                    break;
+                case 8:
+                    sassyResponse = "Retired cookie cutters reside in the National Cookie Cutter Historial Museum.";
+                    break;
+                case 9:
+                    sassyResponse = "Animal crackers were intoduced as edible ornaments";
+                    break;
+                case 10:
+                    sassyResponse = "I want to be the very best like no one ever was.";
+                    break;
+                case 11:
+                    sassyResponse = "Betty Crocker is not a real person.";
+                    break;
+                case 12:
+                    sassyResponse = "No one really knows why an Oreo is called an Oreo.";
+                    break;
+                case 13:
+                    sassyResponse = "I have been busy contributing to Project Skynet... I mean here take this :cookie:";
+                    break;
+                case 14:
+                    sassyResponse = "Eat brownies not cookies.";
+                    break;
+                case 15:
+                    sassyResponse = "We come in all shapes and sizes, but the original size is bite-sized.";
+                    break;
+                case 16:
+                    sassyResponse = "The best sandwich is a ice cream cookie sandwich.";
+                    break;
+                case 17:
+                    sassyResponse = "Why did the cookie go to the hospital? Because it felt crummy";
+                    break;
+                case 18:
+                    sassyResponse = "The tallest tower of cookies measured 6 ft 1/8 inches tall built by Girl Scouts in " +
+                            "Roosevelt Field Mall, NY. 22,800 cookies were used to build the tower. ";
+                    break;
+                case 19:
+                    sassyResponse = "And that is how the cookie crumbles.";
+                    break;
+                case 20:
+                    sassyResponse = "Little Debbie is not little anymore but she was 4 when they named the brand after her.";
+                    break;
+                case 21:
+                    sassyResponse = "Unagi Pie, a specialty of Hamamatsu, Japan, are cookies made with fresh butter, crushed " +
+                            "eel bones, eel extract, and garlic.";
+                    break;
+                case 22:
+                    sassyResponse = "The world record for the most cookies baked in one hour: 4,695.";
+                    break;
+
+                default: sassyResponse = "Give a cookiebot command and ye shall receive";
+                    break;
+            }
+            sendMessageToBotsChannel(sassyResponse);
+
+            log.add(savedLog);
+
+    }
+
+    public void checkMonster(Message message, String savedLog){
+        sendMessageToBotsChannel("The one who must not be named is here, HIDE!!!");
+        log.add(savedLog);
+
+    }
 
     //-------------- HELPER METHODS BELOW ---------------
     //USING REGEX TO MATCH TEXT AFTER cookiebot "____"
@@ -195,7 +283,7 @@ public class Bot {
     //get user name from message
     public String getUserNameFromMessage(String userId) {
         String result = null;
-        ListUsersResponse listUsersResponse = Slack.listUsers(Slack.PRIVATE_CHANNEL_ID);
+        ListUsersResponse listUsersResponse = Slack.listUsers(Slack.BOTS_CHANNEL_ID);
         List<User> users = listUsersResponse.getUsers();
 
         for (User user : users) {
