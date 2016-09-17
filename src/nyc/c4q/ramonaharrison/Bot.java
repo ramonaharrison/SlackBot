@@ -135,19 +135,19 @@ public class Bot {
     }
 
     public void listUsers(String channelId) {
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+        ListUsers listUsers = Slack.listUsers(channelId);
 
-        if (listMessagesResponse.isOk()) {
-            List<Message> messages = listMessagesResponse.getMessages();
+        if (listUsers.isOk()) {
+            List<User> users = listUsers.getUser();
 
-            System.out.println("\nMessages: ");
-            for (Message message : messages) {
+            System.out.println("\nUsers: ");
+            for (User user : users) {
                 System.out.println();
-                System.out.println("Timestamp: " + message.getTs());
-                System.out.println("Message: " + message.getUser());
+
+                System.out.println("User: " + user.getName());
             }
         } else {
-            System.err.print("Error listing messages: " + listMessagesResponse.getError());
+            System.err.print("Error listing messages: " + listUsers.getError());
         }
     }
 }

@@ -4,7 +4,9 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -23,6 +25,8 @@ import java.util.List;
 public class Slack {
 
     private static final String API_KEY = Token.findApiToken();
+    private static final String USER_NAME= "Smartbot";
+    private static final String USER_ICON="http://i50.photobucket.com/albums/f329/liudmilaura/Yin_zpshsyvcsod.jpg";
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
@@ -74,7 +78,7 @@ public class Slack {
 
     public static ListUsers listUsers(String channelId) {
 
-        URL listUsersUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
+        URL listUsersUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId );
 
         return new ListUsers(HTTPS.get(listUsersUrl));
     }
@@ -93,7 +97,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTSTEST_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY +"&icon_url="+ USER_ICON+"&username="+USER_NAME +"&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
@@ -105,7 +109,7 @@ public class Slack {
      * @param  //attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
-    public static SendMessageResponse sendMessageWithAttachments( JSONObject obj) throws UnsupportedEncodingException {
+    public static SendMessageResponse sendMessageWithAttachments(JSONArray obj) throws UnsupportedEncodingException {
 
         String attachment =obj.toJSONString();
 
@@ -116,7 +120,7 @@ public class Slack {
 //            throw new RuntimeException(e);
 //        }
         //System.out.println(messageText);
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTSTEST_CHANNEL_ID + "&text="+ "Text"+"&attachments=" + messageText );
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&icon_url="+ USER_ICON+"&username="+USER_NAME+"&channel=" + BOTS_CHANNEL_ID + "&text="+ "Text"+"&attachments=" + messageText );
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
 

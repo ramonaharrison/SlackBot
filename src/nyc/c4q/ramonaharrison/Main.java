@@ -34,59 +34,16 @@ public class Main {
 
             Object obj = parser.parse(new FileReader("/Users/Millochka/Desktop/accesscodeClass/SlackBot/src/nyc/c4q/ramonaharrison/model/Attachment.json"));
 
-            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray jsonObject = (JSONArray) obj;
 
         Slack.sendMessageWithAttachments(jsonObject);
 
 
 
-            //jsonObject.color
-//            JSONObject object1 =new JSONObject();
-//            JSONArray array = new JSONArray();
-//        JSONObject object2 =new JSONObject();
-
-
-//
-//            ArrayList<Attachment> attachments = new ArrayList();
-//            attachments.add(new Attachment(jsonObject));
-//            System.out.println(jsonObject.toString());
-////
-//        object1.put("title","Priority");
-//        object1.put("value","High");
-//        object1.put("short",false);
-//        array.add(object1);
-//        object2.put("fields",array);
-//        jsonObject.put("fallback","Required plain-text summary of the attachment.");
-//        jsonObject.put("color","#36a64f");
-//        jsonObject.put("pretext","Optional text that appears above the attachment block");
-//        jsonObject.put("author_name","Bobby Tables");
-//        jsonObject.put("author_link","http://flickr.com/bobby/");
-//        jsonObject.put("author_icon","http://flickr.com/icons/bobby.jpg");
-//        jsonObject.put("title","Slack API Documentation");
-//        jsonObject.put("author_link","http://flickr.com/bobby/");
-//        jsonObject.put("title_link","https://api.slack.com/");
-//        jsonObject.put("text","Optional text that appears within the attachment");
-
-
 
             Bot myBot = new Bot();
-        //myBot.listUsers(Slack.BOTSTEST_CHANNEL_ID);
-            //myBot.listMessages(Slack.BOTSTEST_CHANNEL_ID);
 
-            //Slack.sendMessageWithAttachments("This is my first atatchment", jsonObject);
-        //}
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
-
-//        for(String map: words.getmWord().keySet())
-//        System.out.println(words.getmWord().get(map));
-//            //for(int i=0;i<3;i++){
-//       Bot myBot = new Bot();
-//     myBot.replaceWord(Slack.BOTSTEST_CHANNEL_ID);
+     myBot.replaceWord(Slack.BOTS_CHANNEL_ID);
 
             //}
 
