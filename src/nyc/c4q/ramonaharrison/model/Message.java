@@ -73,4 +73,5 @@ public class Message {
     public List<Attachment> getAttachments() {
         return attachments;
     }
+
 }

@@ -2,6 +2,9 @@ package nyc.c4q.ramonaharrison.network.response;
 
 import org.json.simple.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by Ramona Harrison
  * on 8/26/16
@@ -33,4 +36,5 @@ public class Response {
     public String getError() {
         return error;
     }
+
 }
