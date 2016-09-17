@@ -1,9 +1,6 @@
 package nyc.c4q.ramonaharrison.model;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.json.simple.JSONObject;
-
-import java.util.Random;
 
 /**
  * Created by Rafael on 9/14/16.
