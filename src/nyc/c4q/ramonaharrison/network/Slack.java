@@ -64,7 +64,6 @@ public class Slack {
     public static ListMessagesResponse listMessages(String channelId) {
 
         URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
-
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
