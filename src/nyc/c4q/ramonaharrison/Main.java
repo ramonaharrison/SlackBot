@@ -10,15 +10,18 @@ public class Main {
 
         myBot.testApi();
 
-        myBot.listChannels();
+       myBot.listChannels();
 
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+       myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
         // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessage("Hello, world!");
+        myBot.sendMessageToBotsChannel("<@U23BNTWK0>");
 
         // Post a pineapple photo to the #bots channel
-        //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+        //myBot.sendMessageToBotsChannel("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+        //System.out.println();
+        System.out.println(myBot.listLastMessage());
+
 
     }
 }

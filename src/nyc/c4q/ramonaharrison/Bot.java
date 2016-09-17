@@ -14,7 +14,40 @@ import java.util.List;
  */
 
 public class Bot {
-    // TODO: implement your bot logic!
+
+
+    public void checkMessagesAndRespond(String channelId) {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+
+        if (listMessagesResponse.isOk()) {
+            List<Message> messages = listMessagesResponse.getMessages();
+            for (Message message : messages) {
+                if (message.getText().contains("hamburger")) {
+                    Slack.sendMessage("I love hamburgers");
+                    Slack.sendMessage("https://media.giphy.com/media/yYc5L3vhTWeBi/giphy.gif");
+                    break;
+                }else if(message.getText().contains("cat")){
+                    Slack.sendMessage("Cats are meh");
+                    Slack.sendMessage("https://media.giphy.com/media/MVQLSJt38RKJG/giphy.gif");
+                    break;
+                }else if (message.getText().contains("alien")){
+                    Slack.sendMessage("Aliens are scary");
+                    Slack.sendMessage("https://media.giphy.com/media/l3V0ma60jQqGCoJyM/giphy.gif");
+                    break;
+                }else if (message.getText().contains("ufo")){
+                    Slack.sendMessage("OMG UFOS");
+                    Slack.sendMessage("https://media.giphy.com/media/dKVvUk2oH8x2g/giphy.gif");
+                    break;
+                }else {
+                    Slack.sendMessage("life is hard could you lend me some money?");
+                    break;
+                }
+
+
+            }
+
+        }
+    }
 
     public Bot() {
 
@@ -69,6 +102,22 @@ public class Bot {
         }
     }
 
+    public String listLastMessage() {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+
+        if (listMessagesResponse.isOk()) {
+            List<Message> messages = listMessagesResponse.getMessages();
+
+            Message message = messages.get(0);
+
+            return message.getText();
+        } else {
+            System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
+        return "";
+    }
+
+
     /**
      * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
      *
@@ -97,5 +146,7 @@ public class Bot {
         } else {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
+
+
     }
 }
