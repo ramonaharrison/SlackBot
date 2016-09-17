@@ -31,7 +31,7 @@ public class Main {
 //        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 //        myBot.respondDictionary("C2ADPS5MK");
-        myBot.respondMeme("C2ADPS5MK");
+//        myBot.respondMeme("C2ADPS5MK");
 //        myBot.respondGiphy("C2ADPS5MK");
 
 //        myBot.sendMessageToBotsChannel(":poop: messybot will be under maintenance.");
