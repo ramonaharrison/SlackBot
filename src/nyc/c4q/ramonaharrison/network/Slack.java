@@ -23,12 +23,18 @@ public class Slack {
     private static final String API_KEY = Token.findApiToken();
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
+    private static final String ENDPOINT_LIST_USERS = "users.list";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
+    //icon and name
+    private static final String USERNAME = "cookiebot";
+    private static final String ICON_EMOJI = ":cookie:";
+
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    //public static final String PRIVATE_CHANNEL_ID = "G2C31NYLE"; //botfactory channel
 
     /**
      * Static method to test the Slack API.
@@ -41,6 +47,18 @@ public class Slack {
         JSONObject object = HTTPS.get(testUrl);
 
         return new Response(object);
+    }
+
+    /**
+     * Static method to list all public channels on the Slack team.
+     *
+     * @return the ListChannelsResponse indicating ok/error or null if the connection failed.
+     */
+    public static ListUsersResponse listUsers(String channelId) {
+
+        URL listUsersUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_USERS + "?token=" + API_KEY + "&channel=" + channelId);
+        //System.out.println(listUsersUrl); //testing
+        return new ListUsersResponse(HTTPS.get(listUsersUrl));
     }
 
     /**
@@ -64,7 +82,7 @@ public class Slack {
     public static ListMessagesResponse listMessages(String channelId) {
 
         URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&channel=" + channelId);
-
+        //System.out.println(listMessagesUrl);
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
 
@@ -82,7 +100,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText + "&username=" + USERNAME + "&icon_emoji=" + ICON_EMOJI);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
