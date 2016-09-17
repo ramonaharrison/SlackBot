@@ -204,7 +204,7 @@ public class Bot {
                     sassyResponse = "Retired cookie cutters reside in the National Cookie Cutter Historial Museum.";
                     break;
                 case 9:
-                    sassyResponse = "Animal crackers were intoduced as edible ornaments";
+                    sassyResponse = "Animal crackers were introduced as edible ornaments";
                     break;
                 case 10:
                     sassyResponse = "I want to be the very best like no one ever was.";
