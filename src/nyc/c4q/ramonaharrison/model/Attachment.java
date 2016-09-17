@@ -49,8 +49,6 @@ public class Attachment {
     // "ts"
     private long ts;
 
-    private String[] stringArray = {"Hello","another"};
-
     public Attachment(JSONObject json) {
         // TODO: parse an attachment from the incoming json
         if (json.get("fallback") != null) {

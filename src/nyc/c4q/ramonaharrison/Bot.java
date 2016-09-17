@@ -31,7 +31,6 @@ public class Bot {
 
     public List<String> log = new ArrayList<>();
 
-
     public Bot() {
         getLatestTimeStamp();
        // sendMessageToBotsChannel("Hi <!everyone>, don't eat me please!\nYou can talk to me by typing cookiebot -your text-");
@@ -72,6 +71,8 @@ public class Bot {
                         checkRecipes(message, savedLog);
                     } else if (doesMessageContain("cookiebot commands", message)) {
                         checkCommands(message, savedLog);
+                    } else if (doesMessageContain("cookiebot pic", message)) {
+                            checkPics(message, savedLog);
                     } else {
                         convoWithCleverbot(message, savedLog);
                     }
@@ -88,23 +89,23 @@ public class Bot {
 
     //CHECK GREETINGS
     public void checkGreetings(Message message, String savedLog) {
-            sendMessageToBotsChannel("Hello <@" + message.getUser() + ">. Take a cookie.");
-            log.add(savedLog);
+        sendMessageToBotsChannel("Hello <@" + message.getUser() + ">. Take a :cookie:.");
+        log.add(savedLog);
 
     }
 
     //LIST OF COMMANDS
     public void checkCommands(Message message, String savedLog) {                                                            //if log doesn't contain message then
-            sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot games\ncookiebot giphy\n...");
-            log.add(savedLog);
+        sendMessageToBotsChannel("cookie commands:\ncookiebot recipes\ncookiebot pic\n...");
+        log.add(savedLog);
 
     }
 
     //CONVERSE WITH CLEVERBOT
     public void convoWithCleverbot(Message message, String savedLog) {
-            //get text after cookiebot "____", then send that text over to Cleverbot class to get a response from Cleverbot
-            sendMessageToBotsChannel(Cleverbot.sendMessage(getTextAfterCookiebot(message)));
-            log.add(savedLog);
+        //get text after cookiebot "____", then send that text over to Cleverbot class to get a response from Cleverbot
+        sendMessageToBotsChannel(Cleverbot.sendMessage(getTextAfterCookiebot(message)));
+        log.add(savedLog);
 
     }
 
@@ -114,19 +115,19 @@ public class Bot {
         sendMessageToBotsChannel("What do you want to make?");
         log.add(savedLog);
         while (waitingForRequest) {
-            waitingForRequest = checkFoodItems(message);
+            waitingForRequest = requestingRecipe(message);
         }
     }
 
-    public boolean checkFoodItems(Message messageFromThisUser) {
+    public boolean requestingRecipe(Message messageFromRequestingUser) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.PRIVATE_CHANNEL_ID);
         List<Message> messages = listMessagesResponse.getMessages();
 
         for (Message message : messages) {
             if (doesMessageContain("cookiebot", message)
                     && message.getUser() != null
-                    && message.getUser().equals(messageFromThisUser.getUser()) //if message is from this user
-                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromThisUser.getTs())) { //if message timestamp is > this users timestamp when he called cookiebot recipes
+                    && message.getUser().equals(messageFromRequestingUser.getUser()) //if message is from this user
+                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromRequestingUser.getTs())) { //if message timestamp is > this users timestamp when he called cookiebot recipes
 
                 String savedLog = message.getTs() + message.getUser() + message.getText();
 
@@ -139,19 +140,19 @@ public class Bot {
                         throw new RuntimeException(e);
                     }
 
-                    sendMessageToBotsChannel("<http://www.google.com/search?q=recipes+" + messageText + "&unfurl_links=true&btnI|" + getTextAfterCookiebot(message) + " recipe!>");
+                    sendMessageToBotsChannel("<@" + message.getUser() + "> http://www.google.com/search?q=recipes+" + messageText + "&btnI&unfurl_links=true");
                     log.add(savedLog);
                     return false;
                 }
             }
             else if (doesMessageContain("cookiebot", message)
                     && message.getUser() != null
-                    && !message.getUser().equals(messageFromThisUser.getUser()) //if message is from this user
-                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromThisUser.getTs())) {
+                    && !message.getUser().equals(messageFromRequestingUser.getUser()) //if message is not from this user
+                    && Double.parseDouble(message.getTs()) > Double.parseDouble(messageFromRequestingUser.getTs())) {
 
                 String savedLog = message.getTs() + message.getUser() + message.getText();
                 if (!log.contains(savedLog)) {
-                    sendMessageToBotsChannel("<@" + message.getUser() + ">. I'm sorry please wait your turn :)");
+                    sendMessageToBotsChannel("<@" + message.getUser() + ">. SHUT UP HUMAN, wait... until I take care of this other human's request first <@" + messageFromRequestingUser.getUser() + ">.");
                     log.add(savedLog);
                 }
             }
@@ -159,6 +160,10 @@ public class Bot {
         return true;
     }
 
+    public void checkPics(Message message, String savedLog) {
+        sendMessageToBotsChannel("Picture of the most delicious food in the world.");
+        log.add(savedLog);
+    }
     //GUESS WHAT I'M GIPHYING
 
     //-------------- HELPER METHODS BELOW ---------------
