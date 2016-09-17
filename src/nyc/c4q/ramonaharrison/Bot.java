@@ -58,7 +58,7 @@ public class Bot {
                 if (!log.contains(savedLog)) {
 
                     if (doesMessageContain("cookiebot die", message)) {
-                        checkStopMessage(message);
+                        checkStopMessage(message, savedLog);
                         break;
                     } else if (doesMessageContain("cookiebot hi", message) || doesMessageContain("cookiebot hello", message)) {
                         checkGreetings(message, savedLog);
@@ -80,10 +80,19 @@ public class Bot {
         }
     }
 
-    //TERMINATE BOT
-    public void checkStopMessage(Message message) {
-        sendMessageToBotsChannel("cookiebot eating itself away...");
-        Main.loopBot = false;
+    //TERMINATE BOTmessage.getUser().equals("U239PRECU")
+    public void checkStopMessage(Message message, String savedLog) {
+        if (message.getUser().equals("U23A4LK4M")
+                || message.getUser().equals("U239PRECU")
+                || message.getUser().equals("U23AETT50")
+                || message.getUser().equals("U238CFFLK")) {
+            sendMessageToBotsChannel("cookiebot eating itself away...");
+            Main.loopBot = false;
+        }
+        else {
+            sendMessageToBotsChannel("no");
+            log.add(savedLog);
+        }
     }
 
     //CHECK GREETINGS
