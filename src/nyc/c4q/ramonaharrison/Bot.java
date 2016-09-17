@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison;
 
+import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class Bot {
 
-
+    public static int money = 0;
     public void checkMessagesAndRespond(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
@@ -102,7 +103,7 @@ public class Bot {
         }
     }
 
-    public String listLastMessage() {
+    public String lastMessageText() {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
 
         if (listMessagesResponse.isOk()) {
@@ -117,7 +118,16 @@ public class Bot {
         return "";
     }
 
-
+    public Message lastMessage() {
+        ListMessagesResponse lmr = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        if (lmr.isOk()) {
+            List<Message> messages = lmr.getMessages();
+            return messages.get(0);
+        } else {
+            System.err.print("Error listing messages: " + lmr.getError());
+        }
+        return null;
+    }
     /**
      * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
      *
@@ -125,6 +135,17 @@ public class Bot {
      */
     public void sendMessageToBotsChannel(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
+
+        if (sendMessageResponse.isOk()) {
+            System.out.println("Message sent successfully!");
+        } else {
+            System.err.print("Error sending message: " + sendMessageResponse.getError());
+        }
+    }
+
+
+    public void sendMessageToBotsChannelAsPolice(String text) {
+        SendMessageResponse sendMessageResponse = Slack.sendMessageAsPolice(text);
 
         if (sendMessageResponse.isOk()) {
             System.out.println("Message sent successfully!");
@@ -146,6 +167,10 @@ public class Bot {
         } else {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
+    }
+
+    public void sendMessagewithAttachments(String messageTs, List<Attachment> attach){
+        SendMessageResponse smr = Slack.sendMessageWithAttachments(messageTs, attach);
 
 
     }

@@ -30,7 +30,7 @@ public class Slack {
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
     private static final String ENDPOINT_URL_IMAGE = "&icon_url=http://orig02.deviantart.net/9689/f/2012/027/9/c/mr_bender______classy__by_sgtconker1r-d4nqpzu.png";
 
-    public static final String BOTS_CHANNEL_ID = "C2CB0P6TW";
+    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
     /**
      * Static method to test the Slack API.
@@ -90,6 +90,20 @@ public class Slack {
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
 
+    public static SendMessageResponse sendMessageAsPolice(String messageText) {
+
+        try {
+            messageText = URLEncoder.encode(messageText, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&icon_url=http://images.clipartpanda.com/cop-clipart-POLICE-CARTOON-HOLDING-UP-ONE-HAND.jpg" + "&text=" + messageText + "&username=angrycop");
+
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+    }
+
     /**
      * Static method to send a message with one or more attachments to the #bots channel.
      *
@@ -98,9 +112,13 @@ public class Slack {
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
-
+        messageText = "h";
         // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
-        throw new RuntimeException("Method not implemented!");
+
+        String attach = "[{\"pretext\":%20\"pre-hello\",%20\"text\":%20\"text-world\"}]";
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=" + messageText + "&attachments=" + attach);
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+
     }
 
     /**

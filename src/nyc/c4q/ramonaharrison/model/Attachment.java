@@ -17,8 +17,6 @@ import java.util.List;
 
 public class Attachment {
 
-
-
     private String fallback;
     private String color;
     private String pretext;
