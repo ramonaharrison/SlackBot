@@ -27,9 +27,15 @@ public class UrbanDictionary {
         List<Message> messages = listMessagesResponse.getMessages();
 
         for (Message message : messages) {
-            String query = message.getText();
+            String query = messages.get(0).getText();;
             String substr = "+", regex = "\\s";
             query = query.replaceAll(regex,substr);
+
+            StringBuilder builder = new StringBuilder();
+            builder.append(query);
+
+            query = query.substring(builder.indexOf("@U2ADRJVK9") + 12);
+
             return HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST + "?term=" + query + "&unfurl_links=" + UNFURL_LINK);
         }
         return wordSearch();

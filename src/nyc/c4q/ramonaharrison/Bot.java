@@ -18,8 +18,7 @@ import java.util.regex.Pattern;
 
 public class Bot {
 
-    boolean checkGreeting = false;
-
+    Slack myBot;
     public Bot() {
 
     }
@@ -61,22 +60,30 @@ public class Bot {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
         if (listMessagesResponse.isOk()) {
-            List<Message> messages = listMessagesResponse.getMessages();
 
-            Slack myBot = new Slack();
+                List<Message> messages = listMessagesResponse.getMessages();
 
-            for (Message message : messages) {
+                myBot = new Slack();
 
-                String whatDidYouSay = message.getText();
+                for (Message message : messages) {
 
-                if (whatDidYouSay.contains("@U2ADRJVK9") || whatDidYouSay.contains("messybot")) {
-                    myBot.sendMessage("Hello " + message.getUser().toString());
-                    myBot.sendMessage("I am " + Slack.getUSERNAME());
-                    myBot.sendMessage(":poop::poop::poop:");
-                    myBot.sendMessage("Give me a word and I'll find it for you.");
+                    String whatDidYouSay = message.getText();
+
+                    if (whatDidYouSay.contains("@U2ADRJVK9") || whatDidYouSay.contains("messybot")) {
+                        if (whatDidYouSay.contains("Give me a word and I'll find it for you.")) {
+
+                        } else {
+                            if (message.getUser() != null) {
+
+                                myBot.sendMessage("Hello " + message.getUser().toString());
+                            }
+                            myBot.sendMessage("I am " + Slack.getUSERNAME());
+                            myBot.sendMessage(":poop::poop::poop:");
+                            myBot.sendMessage("Did you say " + whatDidYouSay + "?");
+                        }
+                    }
                 }
-            }
-        } else {
+            }else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
     }
@@ -97,7 +104,7 @@ public class Bot {
                 String word = message.getText();
 
 //                while (word != null) {
-                if (word == word) {
+
                     URL slangSearch = urbanDictionary.wordSearch();
                     slangSearch.toString();
 
@@ -110,13 +117,12 @@ public class Bot {
                     myBot.sendMessage(memeSearch.toString());
                     myBot.sendMessage(giphySearch);
 //                    }
-                }
+
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
     }
-
 
     public void respondDictionary(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
@@ -128,11 +134,18 @@ public class Bot {
             UrbanDictionary urbanDictionary = new UrbanDictionary();
 
             for (Message message : messages) {
-
-                String word = message.getText();
                 String user = message.getUser();
+                String word = messages.get(0).getText();
 
-                if (word == word) {
+                String[] parts =  word.split(" ");
+                    String part1 = parts[0]; // @messybot
+                    String part2 = parts[1]; // query word
+                System.out.println(part2);
+
+                StringBuilder builder = new StringBuilder();
+                builder.append(part2);
+
+                if (builder.indexOf("Give me a word") == -1) {
                     URL slangSearch = urbanDictionary.wordSearch();
                     slangSearch.toString();
 

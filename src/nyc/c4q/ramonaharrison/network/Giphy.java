@@ -44,7 +44,7 @@ public class Giphy {
                 String giphyString = myObj.get("fixed_height_downsampled_url").toString();
                     System.out.println(giphyString);
                 return giphyString;
-            }else
+            } else
                 return null;
         }
         return " ";

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class User {
 
-    // TODO: implement private fields for each of the following user JSON keys:
+    // implement private fields for each of the following user JSON keys:
     // "id"
     // "name"
     // "deleted"

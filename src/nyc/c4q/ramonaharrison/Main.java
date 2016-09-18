@@ -9,26 +9,31 @@ public class Main {
 
     public static void main(String[] args){
 
-        Bot myBot = new Bot();
-        //     myBot.testApi();
-//      myBot.deleteMessageInBotsChannel("1474042536.000733");
+    Bot myBot = new Bot();
 
-        myBot.listChannels();
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+//    myBot.testApi();
+//    myBot.deleteMessageInBotsChannel("1474042536.000733");
 
-        myBot.addReaction();
+    myBot.listChannels();
+    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-        myBot.respondGreeting("C2ADPS5MK");
+    myBot.addReaction();
 
-        myBot.addReaction();
+    myBot.respondGreeting("C2ADPS5MK");
 
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+    myBot.addReaction();
 
-//        myBot.respondAll("C2ADPS5MK");
+    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+
+    myBot.respondAll("C2ADPS5MK");
+
+    myBot.addReaction();
+
+    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+
+
 //
-//        myBot.addReaction();
-//
-//        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+//    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 //        myBot.respondDictionary("C2ADPS5MK");
 //        myBot.respondMeme("C2ADPS5MK");

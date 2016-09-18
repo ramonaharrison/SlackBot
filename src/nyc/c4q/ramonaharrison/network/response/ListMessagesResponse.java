@@ -21,7 +21,6 @@ public class ListMessagesResponse extends Response {
     private List<Message> messages;
     private String user;
 
-
     public ListMessagesResponse(JSONObject json) {
         super(json);
 
@@ -35,6 +34,7 @@ public class ListMessagesResponse extends Response {
             this.messages = new ArrayList<Message>();
             for (int i = 0; i < 1; i++) {
                 this.messages.add(new Message((JSONObject) array.get(i)));
+
             }
         }
     }

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Attachment {
 
-    // TODO: implement private fields for each of the following attachment JSON keys:
+    // implement private fields for each of the following attachment JSON keys:
     // "fallback"
     // "color"
     // "pretext"
