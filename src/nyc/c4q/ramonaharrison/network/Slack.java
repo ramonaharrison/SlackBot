@@ -37,7 +37,7 @@ public class Slack {
     private static final String USERNAME = "messybot";
     private static final String AS_USER = "false";
     private static final String IMAGE_URL = "https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F3osxYpRxjzvPOtwfF6%2Fgiphy.gif";
-    public static final String BOTS_CHANNEL_ID = "C2ADPS5MK";
+    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
     public static String getUSERNAME() {
         return USERNAME;
@@ -135,7 +135,7 @@ public class Slack {
     public static Response addReaction() {
         String emojiName = "hankey";
 
-        ListMessagesResponse listMessagesResponse = Slack.listMessages("C2ADPS5MK");
+        ListMessagesResponse listMessagesResponse = Slack.listMessages("C2ABKERFT");
         List<Message> messages = listMessagesResponse.getMessages();
 
         for (Message message : messages) {

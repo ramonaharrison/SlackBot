@@ -99,24 +99,20 @@ public class Bot {
 
                 String word = message.getText();
 
-//                while (word != null) {
+                        URL slangSearch = urbanDictionary.wordSearch();
+                        slangSearch.toString();
 
-                    URL slangSearch = urbanDictionary.wordSearch();
-                    slangSearch.toString();
+                        URL memeSearch = memes.memeSearch();
+                        memeSearch.toString();
 
-                    URL memeSearch = memes.memeSearch();
-                    memeSearch.toString();
+                        String giphySearch = giphy.giphySearch();
 
-                    String giphySearch = giphy.giphySearch();
-
-                    myBot.sendMessage(slangSearch.toString());
-                    Slack.addReaction();
-                    myBot.sendMessage(memeSearch.toString());
-                    Slack.addReaction();
-                    myBot.sendMessage(giphySearch);
-                    Slack.addReaction();
-//                    }
-
+                        myBot.sendMessage(slangSearch.toString());
+                        Slack.addReaction();
+                        myBot.sendMessage(memeSearch.toString());
+                        Slack.addReaction();
+                        myBot.sendMessage(giphySearch);
+                        Slack.addReaction();
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
@@ -134,17 +130,9 @@ public class Bot {
 
             for (Message message : messages) {
                 String user = message.getUser();
-                String word = messages.get(0).getText();
+                String word = message.getText();
 
-                String[] parts =  word.split(" ");
-                    String part1 = parts[0]; // @messybot
-                    String part2 = parts[1]; // query word
-                System.out.println(part2);
-
-                StringBuilder builder = new StringBuilder();
-                builder.append(part2);
-
-                if (builder.indexOf("Give me a word") == -1) {
+                if (word.contains("ud")) {
                     URL slangSearch = urbanDictionary.wordSearch();
                     slangSearch.toString();
 
@@ -168,7 +156,7 @@ public class Bot {
             for (Message message : messages) {
 
                 String aMeme = message.getText();
-                if (aMeme == aMeme) {
+                if (aMeme.contains("meme")) {
                     URL memeSearch = memes.memeSearch();
                     memeSearch.toString();
                     myBot.sendMessage(memeSearch.toString());
@@ -191,7 +179,7 @@ public class Bot {
             for (Message message : messages) {
                 String aGiphy = message.getText();
 
-                if (aGiphy == aGiphy) {
+                if (aGiphy.contains("giphy")) {
                     String giphySearch = giphy.giphySearch();
                     myBot.sendMessage(giphySearch.toString());
                 }

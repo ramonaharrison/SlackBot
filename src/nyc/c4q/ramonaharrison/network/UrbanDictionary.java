@@ -34,7 +34,9 @@ public class UrbanDictionary {
             StringBuilder builder = new StringBuilder();
             builder.append(query);
 
-            query = query.substring(builder.indexOf("@U2ADRJVK9") + 12);
+            query = query.substring(builder.indexOf("@U2ADRJVK9") + 15);
+//            query = query.substring(builder.lastIndexOf("@U2ADRJVK9 ud") + 5);
+
 
             return HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST + "?term=" + query + "&unfurl_links=" + UNFURL_LINK);
         }

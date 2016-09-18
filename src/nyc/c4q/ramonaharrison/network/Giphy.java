@@ -25,7 +25,7 @@ public class Giphy {
 
     public static String giphySearch() {
 
-        ListMessagesResponse listMessagesResponse = Slack.listMessages("C2ADPS5MK");
+        ListMessagesResponse listMessagesResponse = Slack.listMessages("C2ABKERFT");
         List<Message> messages = listMessagesResponse.getMessages();
 
         for (Message message : messages) {
@@ -36,7 +36,7 @@ public class Giphy {
             StringBuilder builder = new StringBuilder();
             builder.append(query);
 
-            query = query.substring(builder.indexOf("@U2ADRJVK9") + 12);
+            query = query.substring(builder.indexOf("@U2ADRJVK9") + 18);
 
             URL giphyURL = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST + "random?" + "api_key=" + API + "&tag=" + query);
                 System.out.println(giphyURL);

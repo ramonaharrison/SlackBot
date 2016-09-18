@@ -19,16 +19,23 @@ public class Main {
 
     myBot.addReaction();
 
-    myBot.respondGreeting("C2ADPS5MK");
+    myBot.respondGreeting("C2ABKERFT");
 
     myBot.addReaction();
 
     myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-    myBot.respondAll("C2ADPS5MK");
+//    myBot.respondAll("C2ABKERFT");
+        myBot.respondDictionary("C2ABKERFT");
+        myBot.addReaction();
 
-    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+        myBot.respondMeme("C2ABKERFT");
+        myBot.addReaction();
 
+        myBot.respondGiphy("C2ABKERFT");
+        myBot.addReaction();
+
+        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 //
 //    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
