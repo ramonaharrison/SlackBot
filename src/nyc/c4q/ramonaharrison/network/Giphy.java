@@ -33,6 +33,11 @@ public class Giphy {
             String substr = "+", regex = "\\s";
             query = query.replaceAll(regex, substr);
 
+            StringBuilder builder = new StringBuilder();
+            builder.append(query);
+
+            query = query.substring(builder.indexOf("@U2ADRJVK9") + 12);
+
             URL giphyURL = HTTPS.stringToURL(BASE_URL + ENDPOINT_TEST + "random?" + "api_key=" + API + "&tag=" + query);
                 System.out.println(giphyURL);
 
