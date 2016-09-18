@@ -77,9 +77,9 @@ public class Bot {
 
                                 myBot.sendMessage("Hello " + message.getUser().toString());
                             }
-                            myBot.sendMessage("I am " + Slack.getUSERNAME());
+                            myBot.sendMessage("I am messybot");
                             myBot.sendMessage(":poop::poop::poop:");
-                            myBot.sendMessage("Did you say " + whatDidYouSay + "?");
+                            myBot.sendMessage("You asked for " + whatDidYouSay);
                         }
                     }
                 }
