@@ -67,22 +67,18 @@ public class Bot {
 
                 for (Message message : messages) {
 
-                    String whatDidYouSay = message.getText();
+                    String whatDidYouSay = "";
+                        whatDidYouSay = message.getText();
+                        if (whatDidYouSay.contains("@U2ADRJVK9") || whatDidYouSay.contains("messybot")) {
+                                if (message.getUser() != null) {
 
-                    if (whatDidYouSay.contains("@U2ADRJVK9") || whatDidYouSay.contains("messybot")) {
-                        if (whatDidYouSay.contains("Give me a word and I'll find it for you.")) {
-
-                        } else {
-                            if (message.getUser() != null) {
-
-                                myBot.sendMessage("Hello " + message.getUser().toString());
+                                    myBot.sendMessage("Hello " + message.getUser().toString());
+                                }
+                                myBot.sendMessage("I am messybot");
+                                myBot.sendMessage(":poop::poop::poop:");
+                                myBot.sendMessage("You asked for " + whatDidYouSay);
                             }
-                            myBot.sendMessage("I am messybot");
-                            myBot.sendMessage(":poop::poop::poop:");
-                            myBot.sendMessage("You asked for " + whatDidYouSay);
                         }
-                    }
-                }
             }else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
@@ -114,8 +110,11 @@ public class Bot {
                     String giphySearch = giphy.giphySearch();
 
                     myBot.sendMessage(slangSearch.toString());
+                    Slack.addReaction();
                     myBot.sendMessage(memeSearch.toString());
+                    Slack.addReaction();
                     myBot.sendMessage(giphySearch);
+                    Slack.addReaction();
 //                    }
 
             }

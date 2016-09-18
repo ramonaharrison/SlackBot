@@ -27,8 +27,6 @@ public class Main {
 
     myBot.respondAll("C2ADPS5MK");
 
-    myBot.addReaction();
-
     myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 
