@@ -1,0 +1,27 @@
+ [
+    {
+      "fallback": "Required plain-text summary of the attachment.",
+      "color": "#ff0066",
+      "pretext": "Optional text that appears above the attachment block",
+      "author_name": "Mila Urakhchinskaya",
+      "author_link": "http://flickr.com/bobby/",
+      "author_icon": "http://static5.depositphotos.com/1043279/481/i/950/depositphotos_4812581-Banyan-or-ficus-bonsai-tree.jpg",
+      "title": "Polite Words and Expressions",
+      "title_link": "http://www.macmillandictionary.com/us/thesaurus-category/american/polite-words-and-expressions",
+      "text": "Please, familiarize yourself with Dictionary of Polite word ",
+      "fields": [
+        {
+          "title": "Priority",
+          "value": "High",
+          "short": false
+        }
+      ],
+      "image_url": "http://codropspz.tympanus.netdna-cdn.com/codrops/wp-content/uploads/2016/04/preview.gif",
+      "thumb_url": "http://example.com/path/to/thumb.png",
+      "footer": "Educational Opportunity",
+      "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+      "ts": 123456789
+    }
+  ]
+
+
