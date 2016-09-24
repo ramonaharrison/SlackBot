@@ -10,7 +10,7 @@ import java.util.List;
  * Created by shannonalexander-navarro on 9/17/16.
  */
 public class Quiz {
-    public static void quiz() {
+    public static void quiz() throws InterruptedException {
         Slack.sendMessage("Yo bot channel 'bout to be lit g! You goody?");
 
         boolean playing = true;
@@ -50,23 +50,28 @@ public class Quiz {
                         + "Pick a, b, or c, aight? "
                         + "\n1st question: The word is Situationship. As in \"Sounds like you in a situationship\"."
                         + "\na)A situation   b)Playing at being in a relationship without actually being in one  c)A committed relationship");
-                ListMessagesResponse listMessagesResponse1 = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
-                messages = listMessagesResponse.getMessages();
-                secondResponse = messages.get(0).getText();
-                if (secondResponse.equalsIgnoreCase("b")) {
-                    Slack.sendMessage("I see you. You obviously out in these streets, I'ma make sure I put some respek on your name.");
-                    Slack.sendMessage(Images.makeImages(4));
-                    playing = false;
-                } else if (secondResponse.equalsIgnoreCase("a") || secondResponse.equalsIgnoreCase("c")) {
-                    Slack.sendMessage("Good for you, obviously you ain't neva been in one-the answer was b.");
-                    Slack.sendMessage(Images.makeImages(1));
-                } else {
-                    Slack.sendMessage("Yo, a, b or c only homie.");
-                    Slack.sendMessage(Images.makeImages(0));
-                    playing = false;
-                }
-            }
+                Thread.sleep(5000);
 
+                    ListMessagesResponse listMessagesResponse1 = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+                    messages = listMessagesResponse1.getMessages();
+                    secondResponse = messages.get(0).getText();
+                    if (secondResponse.equalsIgnoreCase("b")) {
+                        Slack.sendMessage("I see you. You obviously out in these streets, I'ma make sure I put some respek on your name.");
+                        Slack.sendMessage(Images.makeImages(4));
+                        playing = false;
+
+                    } else if (secondResponse.equalsIgnoreCase("a") || secondResponse.equalsIgnoreCase("c")) {
+                        Slack.sendMessage("Good for you, obviously you ain't neva been in one-the answer was b.");
+                        Slack.sendMessage(Images.makeImages(1));
+                    } else {
+                        Slack.sendMessage("Yo, a, b or c only homie.");
+                        Slack.sendMessage(Images.makeImages(0));
+                        playing = false;
+
+                    }
+                }
+
+            }
         }
-    }
+
 }
