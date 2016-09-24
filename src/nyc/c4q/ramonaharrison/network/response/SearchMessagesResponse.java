@@ -19,7 +19,7 @@ public class SearchMessagesResponse extends Response {
         if (json.containsKey("messages")) {
             JSONArray array = (JSONArray) json.get("messages");
 
-            if (json.containsKey("user")){
+            if (json.containsKey("user")) {
                 this.user = (String) json.get("user");
             }
 

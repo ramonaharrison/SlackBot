@@ -1,18 +1,12 @@
 package nyc.c4q.ramonaharrison.network.response;
 
-import nyc.c4q.ramonaharrison.model.*;
-import nyc.c4q.ramonaharrison.network.Slack;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by CATWONG on 9/17/16.
  */
 
-public class GiphyResponse{
+public class GiphyResponse {
 
     private String data;
     private String url;
@@ -29,7 +23,7 @@ public class GiphyResponse{
             this.url = (String) json.get("url");
         }
 
-        if (json.get("fixed_height_downsampled_url")  != null){
+        if (json.get("fixed_height_downsampled_url") != null) {
             this.fixed_height_downsampled_url = (String) json.get("url");
         }
     }
@@ -37,9 +31,11 @@ public class GiphyResponse{
     public String getData() {
         return data;
     }
+
     public String getUrl() {
         return url;
     }
+
     public String getFixed_height_downsampled_url() {
         return fixed_height_downsampled_url;
     }

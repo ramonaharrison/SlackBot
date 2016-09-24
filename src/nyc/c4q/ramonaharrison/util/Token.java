@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Created by Ramona Harrison
  * on 8/24/16
- *
+ * <p>
  * A utility class for retrieving the API token.
  */
 

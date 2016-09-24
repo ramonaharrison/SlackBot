@@ -9,10 +9,9 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a user.
  * See https://api.slack.com/types/user
- *
  */
 
 public class User {
@@ -64,9 +63,9 @@ public class User {
         if (json.containsKey("userProfile")) {
             JSONArray jsonUserProfile = (JSONArray) json.get("userProfile");
             this.userProfile = new ArrayList<Profile>();
-                for (int i = 0; i < jsonUserProfile.size(); i++) {
+            for (int i = 0; i < jsonUserProfile.size(); i++) {
                 Profile profile = new Profile((JSONObject) jsonUserProfile.get(i));
-                    this.userProfile.add(profile);
+                this.userProfile.add(profile);
             }
         }
 

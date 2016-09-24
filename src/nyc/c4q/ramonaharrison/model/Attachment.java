@@ -9,10 +9,8 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
  * A class representing a message attachment.
  * See https://api.slack.com/docs/message-attachments
- *
  */
 
 public class Attachment {
@@ -34,8 +32,10 @@ public class Attachment {
     // "footer_icon"
     // "ts"
 
+    List<Action> actions;
     private String fallback;
     private String color;
+    private String callback_id;
     private String pretext;
     private String author_name;
     private String author_link;
@@ -51,7 +51,6 @@ public class Attachment {
     private String ts;
 
     public Attachment(JSONObject json) {
-
 
         // parse a user from the incoming json
 
@@ -111,13 +110,22 @@ public class Attachment {
             JSONArray jsonFields = (JSONArray) json.get("fields");
             this.fields = new ArrayList<Field>();
             for (int i = 0; i < jsonFields.size(); i++) {
-                Field field = new Field ((JSONObject) jsonFields.get(i));
+                Field field = new Field((JSONObject) jsonFields.get(i));
                 this.fields.add(field);
             }
         }
 
         if (json.containsKey("ts")) {
             this.ts = (String) json.get("ts");
+        }
+
+        if (json.containsKey("actions")) {
+            JSONArray jsonActions = (JSONArray) json.get("actions");
+            this.actions = new ArrayList<Action>();
+            for (int i = 0; i < jsonActions.size(); i++) {
+                Action action = new Action((JSONObject) jsonActions.get(i));
+                this.actions.add(action);
+            }
         }
     }
     // getters to access private fields

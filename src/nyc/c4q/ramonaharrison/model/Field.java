@@ -1,6 +1,5 @@
 package nyc.c4q.ramonaharrison.model;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Field {

@@ -1,6 +1,5 @@
 package nyc.c4q.ramonaharrison.model;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Profile {
@@ -18,7 +17,7 @@ public class Profile {
     private String image192;
     private String image512;
 
-    public Profile (JSONObject json){
+    public Profile(JSONObject json) {
         if (json.containsKey("firstName")) {
             this.firstName = (String) json.get("firstName");
         }
@@ -65,6 +64,5 @@ public class Profile {
         if (json.containsKey("image512")) {
             this.image512 = (String) json.get("image512");
         }
-
     }
 }

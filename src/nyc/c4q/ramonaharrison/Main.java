@@ -1,54 +1,34 @@
 package nyc.c4q.ramonaharrison;
 
-import nyc.c4q.ramonaharrison.network.Giphy;
-import nyc.c4q.ramonaharrison.network.UrbanDictionary;
 import nyc.c4q.ramonaharrison.network.Slack;
-
 
 public class Main {
 
-    public static void main(String[] args){
+    // 9/23 - retrieved username from last message. did some refactoring (deleted unused methods). changed Giphy url to read
+    // actual url instead of small height fixed url. continue working on respondAll() and started working
+    // on Yelp API integration. 
 
-    Bot myBot = new Bot();
+    public static void main(String[] args) {
+
+        Bot myBot = new Bot();
 
 //    myBot.testApi();
 //    myBot.deleteMessageInBotsChannel("1474042536.000733");
 
-    myBot.listChannels();
-    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-
-    myBot.addReaction();
-
-    myBot.respondGreeting("C2ABKERFT");
-
-    myBot.addReaction();
-
-    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-
-//    myBot.respondAll("C2ABKERFT");
-        myBot.respondDictionary("C2ABKERFT");
-        myBot.addReaction();
-
-        myBot.respondMeme("C2ABKERFT");
-        myBot.addReaction();
-
-        myBot.respondGiphy("C2ABKERFT");
-        myBot.addReaction();
-
+        myBot.listChannels();
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-//
+//      myBot.addReaction();
+        myBot.respondGreeting("C2ERNHJ5D");
+        myBot.respondDictionary("C2ERNHJ5D");
+        myBot.respondMeme("C2ERNHJ5D");
+        myBot.respondGiphy("C2ERNHJ5D");
+
 //    myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+//    myBot.sendMessageToBotsChannel(":poop: messybot will be under maintenance.");
 
-//        myBot.respondDictionary("C2ADPS5MK");
-//        myBot.respondMeme("C2ADPS5MK");
-//        myBot.respondGiphy("C2ADPS5MK");
-
-//        myBot.sendMessageToBotsChannel(":poop: messybot will be under maintenance.");
-
-        // non working method-calls. NEED TO REVISIT OR DELETE
-//        myBot.respondMeme("C2ADPS5MK");
-//        myBot.searchMessages(Slack.BOTS_CHANNEL_ID, "messybot");
+//      I am working on code below.
+//      myBot.respondAll("C2ERNHJ5D");
 
     }
 }

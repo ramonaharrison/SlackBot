@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing the response from channels.history
  * See https://api.slack.com/methods/channels.history
- *
  */
 
 public class ListMessagesResponse extends Response {
@@ -27,7 +26,7 @@ public class ListMessagesResponse extends Response {
         if (json.containsKey("messages")) {
             JSONArray array = (JSONArray) json.get("messages");
 
-            if (json.containsKey("user")){
+            if (json.containsKey("user")) {
                 this.user = (String) json.get("user");
             }
 

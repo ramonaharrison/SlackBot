@@ -2,39 +2,38 @@ package nyc.c4q.ramonaharrison.model;
 
 import org.json.simple.JSONObject;
 
-
 /**
- {
- "data": {
- type: "gif",
- id: "Ggjwvmqktuvf2",
- url: "http://giphy.com/gifs/american-psycho-christian-bale-Ggjwvmqktuvf2",
- image_original_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.gif",
- image_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.gif",
- image_mp4_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.mp4",
- image_frames: "11",
- image_width: "500",
- image_height: "256",
- fixed_height_downsampled_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/200_d.gif",
- fixed_height_downsampled_width: "391",
- fixed_height_downsampled_height: "200",
- fixed_width_downsampled_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/200w_d.gif",
- fixed_width_downsampled_width: "200",
- fixed_width_downsampled_height: "102",
- fixed_height_small_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100.gif",
- fixed_height_small_still_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100_s.gif",
- fixed_height_small_width: "195",
- fixed_height_small_height: "100",
- fixed_width_small_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100w.gif",
- fixed_width_small_still_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100w_s.gif",
- fixed_width_small_width: "100",
- fixed_width_small_height: "51"
- },
- "meta": {
- "status": 200,
- "msg": "OK"
- }
- }
+ * {
+ * "data": {
+ * type: "gif",
+ * id: "Ggjwvmqktuvf2",
+ * url: "http://giphy.com/gifs/american-psycho-christian-bale-Ggjwvmqktuvf2",
+ * image_original_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.gif",
+ * image_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.gif",
+ * image_mp4_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/giphy.mp4",
+ * image_frames: "11",
+ * image_width: "500",
+ * image_height: "256",
+ * fixed_height_downsampled_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/200_d.gif",
+ * fixed_height_downsampled_width: "391",
+ * fixed_height_downsampled_height: "200",
+ * fixed_width_downsampled_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/200w_d.gif",
+ * fixed_width_downsampled_width: "200",
+ * fixed_width_downsampled_height: "102",
+ * fixed_height_small_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100.gif",
+ * fixed_height_small_still_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100_s.gif",
+ * fixed_height_small_width: "195",
+ * fixed_height_small_height: "100",
+ * fixed_width_small_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100w.gif",
+ * fixed_width_small_still_url: "http://s3.amazonaws.com/giphygifs/media/Ggjwvmqktuvf2/100w_s.gif",
+ * fixed_width_small_width: "100",
+ * fixed_width_small_height: "51"
+ * },
+ * "meta": {
+ * "status": 200,
+ * "msg": "OK"
+ * }
+ * }
  */
 public class GiphyData {
 
@@ -64,7 +63,7 @@ public class GiphyData {
     public GiphyData(JSONObject json) {
         // parse data from the incoming json
 
-        if (json.containsKey("type")){
+        if (json.containsKey("type")) {
             this.type = (String) json.get("type");
         }
 
@@ -243,6 +242,4 @@ public class GiphyData {
     public String getFixed_width_small_height() {
         return fixed_width_small_height;
     }
-
-
 }
