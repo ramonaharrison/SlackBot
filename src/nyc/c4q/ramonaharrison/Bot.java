@@ -7,9 +7,7 @@ import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Words;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by Ramona Harrison
@@ -26,34 +24,6 @@ public class Bot {
 
 
 
-    public void replaceWord(String channelId){
-        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
-
-        if (listMessagesResponse.isOk()) {
-
-
-            List<Message> messages = listMessagesResponse.getMessages();
-
-
-            for(int i=messages.size()-1;i>=0;i--){//for (Message message : messages) {
-
-                for(String replaceable: words.getmWord().keySet()){
-                 if( messages.get(i).getText().contains(replaceable.toLowerCase())){
-                     String output= messages.get(i).getText().replace(replaceable,words.getmWord().get(replaceable));
-                     sendMessageToBotsChannel(output);
-//                     System.out.println("\nMessages: ");
-//                     System.out.println();
-//                     System.out.println("Timestamp: " + message.getTs());
-//                     System.out.println("Message: " + output);
-
-                 }
-                }
-            }
-        } else {
-            System.err.print("Error listing messages: " + listMessagesResponse.getError());
-        }
-
-    }
 
     public void pleaseBotv2(){
         while (true){
@@ -64,7 +34,7 @@ public class Bot {
                 String originalMessage = messages.get(0).getText();
                 if(originalMessage.toLowerCase().contains("please")){
                     bot.sendMessageToBotsChannel("Someone said please. Here's a cat gif");
-                    bot.sendMessageToBotsChannel(CatGifs.catPics());
+                    bot.sendMessageToBotsChannel(AnimalGifs.catPics());
                 }
 
 
@@ -78,6 +48,123 @@ public class Bot {
         }
 
     }
+
+
+
+
+    public void pleaseBotv4(){
+        int count = 0;
+        while (true){
+            ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTSTEST_CHANNEL_ID);
+            if (listMessagesResponse.isOk()) {
+                Bot bot = new Bot();
+                List<Message> messages = listMessagesResponse.getMessages();
+                String originalMessage = messages.get(0).getText();
+                if(count <= 3 && originalMessage.toLowerCase().contains("please")){
+                    bot.sendMessageToBotsChannel("Someone said please. Here's a cat gif");
+                    bot.sendMessageToBotsChannel(AnimalGifs.catPics());
+                    count++;
+                }
+                if(count >= 4 && count <= 6 && originalMessage.toLowerCase().contains("please")){
+                    bot.sendMessageToBotsChannel("That's enough cats. Here's a dog gif");
+                    bot.sendMessageToBotsChannel(AnimalGifs.dogPics());
+                    count++;
+                }
+                if(count > 6){
+                    count = 0;
+                }
+
+
+
+
+            }
+            else{  System.err.print("Error listing messages: " + listMessagesResponse.getError());
+                break;
+
+            }
+
+
+        }
+
+    }
+
+
+
+    public void pleaseBotv3() {
+        int count = 0;
+        while (true) {
+            ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTSTEST_CHANNEL_ID);
+            if (listMessagesResponse.isOk()) {
+                Bot bot = new Bot();
+                List<Message> messages = listMessagesResponse.getMessages();
+                String originalMessage = messages.get(0).getText();
+                while (count <= 5) {
+                    if (originalMessage.toLowerCase().contains("please")) {
+                        bot.sendMessageToBotsChannel("Someone said the magic word. Here's a cat gif");
+                        bot.sendMessageToBotsChannel(AnimalGifs.catPics());
+                        count++;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                while (count == 6) {
+                    if (originalMessage.toLowerCase().contains("please")) {
+                        bot.sendMessageToBotsChannel("That's enough Cats. Here's a dog gif instead");
+                        bot.sendMessageToBotsChannel(AnimalGifs.dogPics());
+                        count++;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                while (count >= 7 && count <= 10) {
+                    if (originalMessage.toLowerCase().contains("please")) {
+                        bot.sendMessageToBotsChannel("Someone said the magic word. Here's a dog gif");
+                        bot.sendMessageToBotsChannel(AnimalGifs.dogPics());
+                        count++;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+                while (count == 11) {
+                    if (originalMessage.toLowerCase().contains("please")) {
+                        bot.sendMessageToBotsChannel("That's enough dogs. Here's a cat gif instead");
+                        bot.sendMessageToBotsChannel(AnimalGifs.catPics());
+                        count = 1;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+
+            }
+
+
+            else{
+                    System.err.print("Error listing messages: " + listMessagesResponse.getError());
+                    break;
+
+                }
+
+
+            }
+
+        }
+
+
+
+
+
+
+
 
     /**
      * Sample method: tests the Slack API. Prints a message indicating success or failure.
