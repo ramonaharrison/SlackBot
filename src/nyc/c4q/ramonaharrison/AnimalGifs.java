@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by jordansmith on 9/16/16.
  */
-public class CatGifs {
+public class AnimalGifs {
 
 
     public static String catPics(){
@@ -43,6 +43,38 @@ public class CatGifs {
         Random rand = new Random();
         int randomint = rand.nextInt(28);
         return catPicsArray[randomint];
+
+    }
+
+    public static String dogPics(){
+        String [] dogPicsArray = new String [21];
+        dogPicsArray[0] = "http://i.imgur.com/mJRa4GD.gif";
+        dogPicsArray[1] = "http://i.imgur.com/cOoXLpI.gif";
+        dogPicsArray[2] = "http://i.imgur.com/DI4bf50.gif";
+        dogPicsArray[3] = "http://i.imgur.com/9nROuQm.gif";
+        dogPicsArray[4] = "http://i.imgur.com/4mMMYPF.gif";
+        dogPicsArray[5] = "http://i.imgur.com/zyk2jFL.gif";
+        dogPicsArray[6] = "http://i.imgur.com/R9ovCJh.gif";
+        dogPicsArray[7] = "http://i.imgur.com/ow2o1bM.gif";
+        dogPicsArray[8] = "http://i.imgur.com/hRUJSRv.gif";
+        dogPicsArray[9] = "http://i.imgur.com/m6mZY6K.gif";
+        dogPicsArray[10] = "http://i.imgur.com/pCmV1uv.gif";
+        dogPicsArray[11] = "http://i.imgur.com/QRixBl4.gif";
+        dogPicsArray[12] = "http://i.imgur.com/cUYg2a8.gif";
+        dogPicsArray[13] = "http://i.imgur.com/yFcHOv4.gif";
+        dogPicsArray[14] = "http://i.imgur.com/DJvGKg9.gif";
+        dogPicsArray[15] = "http://i.imgur.com/2FMwZuV.gif";
+        dogPicsArray[16] = "http://i.imgur.com/jggkck1.gif";
+        dogPicsArray[17] = "http://i.imgur.com/R3ZnXeR.gif";
+        dogPicsArray[18] = "http://i.imgur.com/FcWJwYM.gif";
+        dogPicsArray[19] = "http://i.imgur.com/pbHDghc.gif";
+        dogPicsArray[20] = "http://i.imgur.com/RgxRyUu.gif";
+
+        Random rand = new Random();
+        int randomint = rand.nextInt(21);
+        return dogPicsArray[randomint];
+
+
 
     }
 
