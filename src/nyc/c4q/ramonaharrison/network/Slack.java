@@ -25,13 +25,14 @@ public class Slack {
     private static final String API_KEY = Token.findApiToken();
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
-    private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
+    private static final String ENDPOINT_LIST_CHANNELS = "groups.list";
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
     private static final String ENDPOINT_URL_IMAGE = "&icon_url=http://orig02.deviantart.net/9689/f/2012/027/9/c/mr_bender______classy__by_sgtconker1r-d4nqpzu.png";
 
-    public static final String BOTS_CHANNEL_ID = "G2FBLTCGK";
+//    public static final String BOTS_CHANNEL_ID = "G2FBLTCGK";
+    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
     /**
      * Static method to test the Slack API.
