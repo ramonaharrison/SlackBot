@@ -131,18 +131,7 @@ public class Slack {
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
 
     }
-
-
-
-    public static SendMessageResponse sendMessageWithAttachments() {
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=sup%20yo?" + "&attachments=" + "[{\"color\":%20\"%2336a64f\",%20\"pretext\":\"Optional%20text%20that%20appears%20above%20the%20attachment%20block\",\"author_name\":\"Bobby%20Tables\",\"author_link\":\"http://flickr.com/bobby/\",\"author_icon\":\"http://flickr.com/icons/bobby.jpg\",\"title\":\"Slack%20API%20Documentation\",\"title_link\":\"https://api.slack.com/\",\"text\":\"Optional%20text%20that%20appears%20within%20the%20attachment\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"http://my-website.com/path/to/image.jpg\",\"thumb_url\":\"http://example.com/path/to/thumb.png\",\"footer\":\"Slack%20API\",\"footer_icon\":\"https://platform.slack-edge.com/img/default_application_icon.png\",\"ts\":" + currentTs() + "}]");
-        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
-    }
-
-    public static SendMessageResponse sendSampleMessageWithButtons() {
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=sup%20homie?" + "&attachments=" + "[{\"text\":\"Choose%20a%20game%20to%20play\",\"fallback\":\"You%20are%20unable%20to%20choose%20a%20game\",\"callback_id\":\"wopr_game\",\"color\":\"%233AA3E3\",\"attachment_type\":\"default\",\"actions\":[{\"name\":\"chess\",\"text\":\"Chess\",\"type\":\"button\",\"value\":\"chess\"},{\"name\":\"maze\",\"text\":\"Falken's%20Maze\",\"type\":\"button\",\"value\":\"maze\"},{\"name\":\"war\",\"text\":\"Thermonuclear%20War\",\"style\":\"danger\",\"type\":\"button\",\"value\":\"war\",\"confirm\":{\"title\":\"Would%20you%20like%20to%20click%20a%20button?\",\"text\":\"Click%20one%20of%20a%20good%20game%20of%20chess?\",\"ok_text\":\"Yes\",\"dismiss_text\":\"No\"}}]}]");
-        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
-    }
+    
 
     /**
      * Static method to delete an existing message from the #bots channel.
