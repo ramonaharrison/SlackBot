@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison.network;
 
+import nyc.c4q.ramonaharrison.Bot;
 import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
@@ -30,7 +31,7 @@ public class Slack {
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
     private static final String ENDPOINT_URL_IMAGE = "&icon_url=http://orig02.deviantart.net/9689/f/2012/027/9/c/mr_bender______classy__by_sgtconker1r-d4nqpzu.png";
 
-    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String BOTS_CHANNEL_ID = "G2FBLTCGK";
 
     /**
      * Static method to test the Slack API.
@@ -111,14 +112,36 @@ public class Slack {
      * @param  attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
-    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
-        messageText = "h";
-        // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
 
-        String attach = "[{\"pretext\":%20\"pre-hello\",%20\"text\":%20\"text-world\"}]";
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=" + messageText + "&attachments=" + attach);
+
+    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
+        // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Attachment attachment: attachments) {
+            if(attachment.equals(attachments.get(attachments.size()-1))){
+                stringBuilder.append("{\"color\":%20\"%23" + attachment.getColor() + "\",%20\"pretext\":\"" + attachment.getPretext() + "\",\"author_name\":\"" + attachment.getAuthor_name() + "\",\"author_link\":\"" + attachment.getAuthor_link() + "\",\"author_icon\":\"" + attachment.getAuthor_icon() + "\",\"title\":\"" + attachment.getTitle() + "\",\"title_link\":\"" + attachment.getTitle_link() + "\",\"text\":\"" + attachment.getText() + "\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"" + attachment.getImageUrl() + "\",\"thumb_url\":\"" + attachment.getThumb_url() + "\",\"footer\":\"" + attachment.getFooter() + "\",\"footer_icon\":\"" + attachment.getFooter_icon() + "\",\"ts\":" + currentTs() + "}]");
+            }else{
+
+                stringBuilder.append("{\"color\":%20\"%23" + attachment.getColor() + "\",%20\"pretext\":\"" + attachment.getPretext() + "\",\"author_name\":\"" + attachment.getAuthor_name() + "\",\"author_link\":\"" + attachment.getAuthor_link() + "\",\"author_icon\":\"" + attachment.getAuthor_icon() + "\",\"title\":\"" + attachment.getTitle() + "\",\"title_link\":\"" + attachment.getTitle_link() + "\",\"text\":\"" + attachment.getText() + "\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"" + attachment.getImageUrl() + "\",\"thumb_url\":\"" + attachment.getThumb_url() + "\",\"footer\":\"" + attachment.getFooter() + "\",\"footer_icon\":\"" + attachment.getFooter_icon() + "\",\"ts\":" + currentTs() + "},");
+            }
+        }
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=" + messageText + "&attachments=" + stringBuilder.toString());
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
 
+    }
+
+
+
+    public static SendMessageResponse sendMessageWithAttachments() {
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=sup%20yo?" + "&attachments=" + "[{\"color\":%20\"%2336a64f\",%20\"pretext\":\"Optional%20text%20that%20appears%20above%20the%20attachment%20block\",\"author_name\":\"Bobby%20Tables\",\"author_link\":\"http://flickr.com/bobby/\",\"author_icon\":\"http://flickr.com/icons/bobby.jpg\",\"title\":\"Slack%20API%20Documentation\",\"title_link\":\"https://api.slack.com/\",\"text\":\"Optional%20text%20that%20appears%20within%20the%20attachment\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"http://my-website.com/path/to/image.jpg\",\"thumb_url\":\"http://example.com/path/to/thumb.png\",\"footer\":\"Slack%20API\",\"footer_icon\":\"https://platform.slack-edge.com/img/default_application_icon.png\",\"ts\":" + currentTs() + "}]");
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+    }
+
+    public static SendMessageResponse sendSampleMessageWithButtons() {
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=sup%20homie?" + "&attachments=" + "[{\"text\":\"Choose%20a%20game%20to%20play\",\"fallback\":\"You%20are%20unable%20to%20choose%20a%20game\",\"callback_id\":\"wopr_game\",\"color\":\"%233AA3E3\",\"attachment_type\":\"default\",\"actions\":[{\"name\":\"chess\",\"text\":\"Chess\",\"type\":\"button\",\"value\":\"chess\"},{\"name\":\"maze\",\"text\":\"Falken's%20Maze\",\"type\":\"button\",\"value\":\"maze\"},{\"name\":\"war\",\"text\":\"Thermonuclear%20War\",\"style\":\"danger\",\"type\":\"button\",\"value\":\"war\",\"confirm\":{\"title\":\"Would%20you%20like%20to%20click%20a%20button?\",\"text\":\"Click%20one%20of%20a%20good%20game%20of%20chess?\",\"ok_text\":\"Yes\",\"dismiss_text\":\"No\"}}]}]");
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
 
     /**
@@ -131,5 +154,10 @@ public class Slack {
         URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
 
         return new DeleteMessageResponse(HTTPS.get(deleteMessageUrl));
+    }
+
+    public static String currentTs() {
+        Long timestamp = System.currentTimeMillis() / 1000L;
+        return timestamp.toString();
     }
 }

@@ -154,6 +154,16 @@ public class Bot {
         }
     }
 
+    public void sendMessageWithAttachmentsToBotsChannel(String text, List<Attachment> attachments) {
+        SendMessageResponse sendMessageResponse = Slack.sendMessageWithAttachments(text,attachments);
+
+        if (sendMessageResponse.isOk()) {
+            System.out.println("Message sent successfully!");
+        } else {
+            System.err.print("Error sending message: " + sendMessageResponse.getError());
+        }
+    }
+
     /**
      * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.
      *
@@ -167,11 +177,5 @@ public class Bot {
         } else {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
-    }
-
-    public void sendMessagewithAttachments(String messageTs, List<Attachment> attach){
-        SendMessageResponse smr = Slack.sendMessageWithAttachments(messageTs, attach);
-
-
     }
 }

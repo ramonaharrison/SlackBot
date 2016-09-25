@@ -33,6 +33,24 @@ public class Attachment {
     private String footer_icon;
     private long ts;
 
+    public Attachment() {
+    }
+
+    public Attachment(String fallback, String color, String pretext, String author_name, String author_link, String author_icon, String title, String title_link, String text, String imageUrl, String thumb_url, String footer, String footer_icon) {
+        this.fallback = fallback;
+        this.color = color;
+        this.pretext = pretext;
+        this.author_name = author_name;
+        this.author_link = author_link;
+        this.author_icon = author_icon;
+        this.title = title;
+        this.title_link = title_link;
+        this.text = text;
+        this.imageUrl = imageUrl;
+        this.thumb_url = thumb_url;
+        this.footer = footer;
+        this.footer_icon = footer_icon;
+    }
 
     public Attachment(JSONObject json) {
 
@@ -166,5 +184,66 @@ public class Attachment {
     public long getTs() {
 
         return ts;
+    }
+
+
+    public void setFallback(String fallback) {
+        this.fallback = fallback;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPretext(String pretext) {
+        this.pretext = pretext;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
+    }
+
+    public void setAuthor_link(String author_link) {
+        this.author_link = author_link;
+    }
+
+    public void setAuthor_icon(String author_icon) {
+        this.author_icon = author_icon;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTitle_link(String title_link) {
+        this.title_link = title_link;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setThumb_url(String thumb_url) {
+        this.thumb_url = thumb_url;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
+    }
+
+    public void setFooter_icon(String footer_icon) {
+        this.footer_icon = footer_icon;
+    }
+
+    public void setTs(long ts) {
+        this.ts = ts;
     }
 }
