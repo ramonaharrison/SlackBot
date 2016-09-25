@@ -42,6 +42,7 @@ public class Bot {
                 System.out.println();
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+                System.out.println("User: " +message.getUser());
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());

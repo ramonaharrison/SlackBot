@@ -1,6 +1,7 @@
 package nyc.c4q.ramonaharrison.network;
 
 import nyc.c4q.ramonaharrison.model.Attachment;
+import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
 import org.json.simple.JSONObject;
@@ -28,6 +29,7 @@ public class Slack {
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
+    private static final String USER_INFO = "users.info";
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
 
@@ -111,5 +113,24 @@ public class Slack {
         URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
 
         return new DeleteMessageResponse(HTTPS.get(deleteMessageUrl));
+    }
+
+    public static String findUserName(){
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
+        List<Message> messages = listMessagesResponse.getMessages();
+
+        for (Message message : messages ) {
+            String name = message.getUser();
+           URL userName = HTTPS.stringToURL(BASE_URL + USER_INFO + "?token=" + API_KEY + "&user" + name + "&pretty=1");
+            JSONObject json = HTTPS.get(userName);
+            if (json.containsKey("user")){
+                JSONObject nameObject = (JSONObject) json.get("user");
+                name = (String) nameObject.get("name");
+                System.out.println(name);
+                return name;
+            }
+
+        }
+        return null;
     }
 }
