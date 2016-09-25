@@ -18,7 +18,6 @@ public class Quiz {
         while (playing) {
             ListMessagesResponse listMessagesResponse = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
             List<Message> messages = listMessagesResponse.getMessages();
-
             String firstResponse = messages.get(0).getText();
             String secondResponse;
             boolean isAnswerOk = true;
@@ -32,15 +31,18 @@ public class Quiz {
                     ListMessagesResponse listMessagesResponse1 = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
                     messages = listMessagesResponse1.getMessages();
                     secondResponse = messages.get(0).getText();
+                    Message userMessage = messages.get(0);
 
                     if (secondResponse.equalsIgnoreCase("b")) {
-                        Slack.sendMessage("I see you " + Slack.findUserName() + ". You obviously out in these streets, I'ma make sure I put some respek on your name.");
-                        Slack.sendMessage(Images.makeImages(4));
-                        Slack.sendMessage("Another right answer, that's a good look. Aight how 'bout deuces?"
-                                + "\n a)A fancy way to say the number 2   b)Another way to say peace   c)Another way to let someone know IDFWY");
-                        SecondQuestion.secondQuestion();
-                        playing = false;
-                        isAnswerOk = false;
+                        if (userMessage.getUser() != null) {
+                            Slack.sendMessage("I see you " + Slack.findUserName() + ". You obviously out in these streets, I'ma make sure I put some respek on your name.");
+                            Slack.sendMessage(Images.makeImages(4));
+                            Slack.sendMessage("Another right answer, that's a good look. Aight how 'bout deuces?"
+                                    + "\n a)A fancy way to say the number 2   b)Another way to say peace   c)Another way to let someone know IDFWY");
+                            SecondQuestion.secondQuestion();
+                            playing = false;
+                            isAnswerOk = false;
+                        }
                     } else if (secondResponse.equalsIgnoreCase("a") || secondResponse.equalsIgnoreCase("c")) {
                         Slack.sendMessage("Good for you, obviously you ain't neva been in one-the answer was b.");
                         Slack.sendMessage(Images.makeImages(1));
@@ -61,10 +63,14 @@ public class Quiz {
                     ListMessagesResponse listMessagesResponse1 = Slack.listMessages(Slack.BOTS_CHANNEL_ID);
                     messages = listMessagesResponse1.getMessages();
                     secondResponse = messages.get(0).getText();
+                    Message userMessage = messages.get(0);
+
                     if (secondResponse.equalsIgnoreCase("b")) {
-                        Slack.sendMessage("I see you. You obviously out in these streets, I'ma make sure I put some respek on your name.");
-                        Slack.sendMessage(Images.makeImages(4));
-                        playing = false;
+                        if (userMessage.getUser() != null) {
+                            Slack.sendMessage("I see you. You obviously out in these streets, I'ma make sure I put some respek on your name.");
+                            Slack.sendMessage(Images.makeImages(4));
+                            playing = false;
+                        }
 
                     } else if (secondResponse.equalsIgnoreCase("a") || secondResponse.equalsIgnoreCase("c")) {
                         Slack.sendMessage("Good for you, obviously you ain't neva been in one-the answer was b.");

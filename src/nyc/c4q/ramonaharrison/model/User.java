@@ -1,7 +1,11 @@
 package nyc.c4q.ramonaharrison.model;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ramona Harrison
@@ -19,7 +23,7 @@ public class User {
     private String name;
     private boolean deleted;
     private String color;
-    private Profile profile;
+    private List<Profile> profile;
     private boolean isAdmin;
     private boolean isOwner;
     private boolean isPrimaryOwner;
@@ -66,6 +70,14 @@ public class User {
         }
         if (json.containsKey("hasFiles")) {
             this.hasFiles = (boolean) json.get("hasFiles");
+        }
+        if (json.containsKey("profile")) {
+            JSONArray jsonProfile = (JSONArray) json.get("profile");
+            this.profile = new ArrayList<Profile>();
+            for (int i = 0; i < jsonProfile.size(); i++){
+                Profile userProfile = new Profile((JSONObject) jsonProfile.get(i));
+                this.profile.add(userProfile);
+            }
         }
     }
 
@@ -119,7 +131,7 @@ public class User {
         return hasFiles;
     }
 
-    public Profile getProfile() {
+    public List<Profile> getProfile() {
         return profile;
     }
 }

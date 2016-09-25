@@ -121,7 +121,7 @@ public class Slack {
 
         for (Message message : messages ) {
             String name = message.getUser();
-           URL userName = HTTPS.stringToURL(BASE_URL + USER_INFO + "?token=" + API_KEY + "&user" + name + "&pretty=1");
+           URL userName = HTTPS.stringToURL(BASE_URL + USER_INFO + "?token=" + API_KEY + "&user=" + name + "&pretty=1");
             JSONObject json = HTTPS.get(userName);
             if (json.containsKey("user")){
                 JSONObject nameObject = (JSONObject) json.get("user");
@@ -129,7 +129,6 @@ public class Slack {
                 System.out.println(name);
                 return name;
             }
-
         }
         return null;
     }

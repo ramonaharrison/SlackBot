@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 
 public class Bot {
+
+
     // TODO: implement your bot logic!
     public void listChannels() {
         ListChannelsResponse listChannelsResponse = Slack.listChannels();
