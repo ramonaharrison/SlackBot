@@ -32,8 +32,11 @@ public class Quiz {
                     messages = listMessagesResponse1.getMessages();
                     secondResponse = messages.get(0).getText();
                     if (secondResponse.equalsIgnoreCase("b")) {
-                        Slack.sendMessage("I see you " + "this.getName()" + ". You obviously out in these streets, I'ma make sure I put some respek on your name.");
+                        Slack.sendMessage("I see you " + /*messages.getName()*/ ". You obviously out in these streets, I'ma make sure I put some respek on your name.");
                         Slack.sendMessage(Images.makeImages(4));
+                        Slack.sendMessage("Another right answer, that's a good look. Aight how 'bout deuces?"
+                                + "\n a)A fancy way to say the number 2   b)Another way to say peace   c)Another way to let someone know IDFWY");
+                        SecondQuestion.secondQuestion();
                         playing = false;
                         isAnswerOk = false;
                     } else if (secondResponse.equalsIgnoreCase("a") || secondResponse.equalsIgnoreCase("c")) {
@@ -42,6 +45,7 @@ public class Quiz {
                         playing = false;
                         isAnswerOk = false;
                     }
+
                 }
 
             } else if (firstResponse.equalsIgnoreCase("n") || firstResponse.equalsIgnoreCase("no")) {

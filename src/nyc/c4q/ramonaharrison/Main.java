@@ -15,7 +15,7 @@ public class Main {
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-       // Quiz.quiz();
+        Quiz.quiz();
 
         // Post "Hello, world!" to the #bots channel
        // myBot.sendMessageToBotsChannel(quiz());
@@ -26,8 +26,8 @@ public class Main {
 //        myBot.deleteMessageInBotsChannel("1474222733.002711");
 //        myBot.deleteMessageInBotsChannel("1474223222.002729");
 //        myBot.deleteMessageInBotsChannel("1474223316.002735");
-        myBot.deleteMessageInBotsChannel("1474223811.002831");
-        myBot.deleteMessageInBotsChannel("1474223970.002865");
+//        myBot.deleteMessageInBotsChannel("1474223811.002831");
+//        myBot.deleteMessageInBotsChannel("1474223970.002865");
 
 
 
