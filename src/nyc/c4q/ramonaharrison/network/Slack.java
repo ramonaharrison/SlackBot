@@ -115,7 +115,7 @@ public class Slack {
 
 
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
-        // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
+        // first new feature
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         for (Attachment attachment: attachments) {
@@ -131,7 +131,13 @@ public class Slack {
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
 
     }
-    
+
+    //Second new feature
+    public static SendMessageResponse sendSampleMessageWithButtons() {
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=sup%20homie?" + "&attachments=" + "[{\"text\":\"Choose%20a%20game%20to%20play\",\"fallback\":\"You%20are%20unable%20to%20choose%20a%20game\",\"callback_id\":\"wopr_game\",\"color\":\"%233AA3E3\",\"attachment_type\":\"default\",\"actions\":[{\"name\":\"chess\",\"text\":\"Chess\",\"type\":\"button\",\"value\":\"chess\"},{\"name\":\"maze\",\"text\":\"Falken's%20Maze\",\"type\":\"button\",\"value\":\"maze\"},{\"name\":\"war\",\"text\":\"Thermonuclear%20War\",\"style\":\"danger\",\"type\":\"button\",\"value\":\"war\",\"confirm\":{\"title\":\"Would%20you%20like%20to%20click%20a%20button?\",\"text\":\"Click%20one%20of%20a%20good%20game%20of%20chess?\",\"ok_text\":\"Yes\",\"dismiss_text\":\"No\"}}]}]");
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+    }
+
 
     /**
      * Static method to delete an existing message from the #bots channel.
