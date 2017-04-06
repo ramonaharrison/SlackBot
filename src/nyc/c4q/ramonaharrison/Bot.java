@@ -2,10 +2,14 @@ package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+import nyc.c4q.ramonaharrison.util.Words;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by Ramona Harrison
@@ -16,7 +20,38 @@ import java.util.List;
 public class Bot {
     // TODO: implement your bot logic!
 
-    public Bot() {
+
+    Words words = new Words();
+    public Bot() {}
+
+
+
+    public void replaceWord(String channelId){
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+
+        if (listMessagesResponse.isOk()) {
+
+
+            List<Message> messages = listMessagesResponse.getMessages();
+
+
+            for(int i=messages.size()-1;i>=0;i--){//for (Message message : messages) {
+
+                for(String replaceable: words.getmWord().keySet()){
+                 if( messages.get(i).getText().contains(replaceable.toLowerCase())){
+                     String output= messages.get(i).getText().replace(replaceable,words.getmWord().get(replaceable));
+                     sendMessageToBotsChannel(output);
+//                     System.out.println("\nMessages: ");
+//                     System.out.println();
+//                     System.out.println("Timestamp: " + message.getTs());
+//                     System.out.println("Message: " + output);
+
+                 }
+                }
+            }
+        } else {
+            System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
 
     }
 
@@ -96,6 +131,23 @@ public class Bot {
             System.out.println("Message deleted successfully!");
         } else {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
+        }
+    }
+
+    public void listUsers(String channelId) {
+        ListUsers listUsers = Slack.listUsers(channelId);
+
+        if (listUsers.isOk()) {
+            List<User> users = listUsers.getUser();
+
+            System.out.println("\nUsers: ");
+            for (User user : users) {
+                System.out.println();
+
+                System.out.println("User: " + user.getName());
+            }
+        } else {
+            System.err.print("Error listing messages: " + listUsers.getError());
         }
     }
 }
