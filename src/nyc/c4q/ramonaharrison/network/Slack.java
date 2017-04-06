@@ -1,5 +1,6 @@
 package nyc.c4q.ramonaharrison.network;
 
+import nyc.c4q.ramonaharrison.Bot;
 import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.response.*;
 import nyc.c4q.ramonaharrison.util.Token;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class Slack {
 
+    private static final String USERNAME = "&username=beggarbot";
     private static final String API_KEY = Token.findApiToken();
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
@@ -27,8 +29,9 @@ public class Slack {
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
+    private static final String ENDPOINT_URL_IMAGE = "&icon_url=http://orig02.deviantart.net/9689/f/2012/027/9/c/mr_bender______classy__by_sgtconker1r-d4nqpzu.png";
 
-    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String BOTS_CHANNEL_ID = "G2FBLTCGK";
 
     /**
      * Static method to test the Slack API.
@@ -82,7 +85,22 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=" + messageText + USERNAME);
+
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+    }
+
+    public static SendMessageResponse sendMessageAsPolice(String messageText) {
+
+        try {
+            messageText = URLEncoder.encode(messageText, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&icon_url=http://images.clipartpanda.com/cop-clipart-POLICE-CARTOON-HOLDING-UP-ONE-HAND.jpg" + "&text=" + messageText + "&username=angrycop");
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
@@ -94,11 +112,26 @@ public class Slack {
      * @param  attachments a list of one of more attachments to be parsed to a JSON-encoded URL string parameter.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
-    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
 
+
+    public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
         // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
-        throw new RuntimeException("Method not implemented!");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Attachment attachment: attachments) {
+            if(attachment.equals(attachments.get(attachments.size()-1))){
+                stringBuilder.append("{\"color\":%20\"%23" + attachment.getColor() + "\",%20\"pretext\":\"" + attachment.getPretext() + "\",\"author_name\":\"" + attachment.getAuthor_name() + "\",\"author_link\":\"" + attachment.getAuthor_link() + "\",\"author_icon\":\"" + attachment.getAuthor_icon() + "\",\"title\":\"" + attachment.getTitle() + "\",\"title_link\":\"" + attachment.getTitle_link() + "\",\"text\":\"" + attachment.getText() + "\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"" + attachment.getImageUrl() + "\",\"thumb_url\":\"" + attachment.getThumb_url() + "\",\"footer\":\"" + attachment.getFooter() + "\",\"footer_icon\":\"" + attachment.getFooter_icon() + "\",\"ts\":" + currentTs() + "}]");
+            }else{
+
+                stringBuilder.append("{\"color\":%20\"%23" + attachment.getColor() + "\",%20\"pretext\":\"" + attachment.getPretext() + "\",\"author_name\":\"" + attachment.getAuthor_name() + "\",\"author_link\":\"" + attachment.getAuthor_link() + "\",\"author_icon\":\"" + attachment.getAuthor_icon() + "\",\"title\":\"" + attachment.getTitle() + "\",\"title_link\":\"" + attachment.getTitle_link() + "\",\"text\":\"" + attachment.getText() + "\",\"fields\":[{\"title\":\"Priority\",\"value\":\"High\",\"short\":false}],\"image_url\":\"" + attachment.getImageUrl() + "\",\"thumb_url\":\"" + attachment.getThumb_url() + "\",\"footer\":\"" + attachment.getFooter() + "\",\"footer_icon\":\"" + attachment.getFooter_icon() + "\",\"ts\":" + currentTs() + "},");
+            }
+        }
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + ENDPOINT_URL_IMAGE + "&text=" + messageText + "&attachments=" + stringBuilder.toString());
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+
     }
+    
 
     /**
      * Static method to delete an existing message from the #bots channel.
@@ -110,5 +143,10 @@ public class Slack {
         URL deleteMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_DELETE_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&ts=" + messageTs);
 
         return new DeleteMessageResponse(HTTPS.get(deleteMessageUrl));
+    }
+
+    public static String currentTs() {
+        Long timestamp = System.currentTimeMillis() / 1000L;
+        return timestamp.toString();
     }
 }
