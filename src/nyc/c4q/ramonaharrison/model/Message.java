@@ -48,6 +48,10 @@ public class Message {
             this.user = (String) json.get("user");
         }
 
+        if (json.get("username") != null) {
+            this.user = (String) json.get("username");
+        }
+
         if (json.get("attachments") != null) {
             JSONArray attachmentsArray = (JSONArray) json.get("attachments");
             this.attachments = new ArrayList<Attachment>();
