@@ -5,10 +5,9 @@ import org.json.simple.JSONObject;
 /**
  * Created by Ramona Harrison
  * on 9/10/16
- *
+ * <p>
  * A class representing the response from chat.delete
  * See https://api.slack.com/methods/chat.delete
- *
  */
 
 public class DeleteMessageResponse extends Response {

@@ -9,31 +9,32 @@ import java.util.List;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a message.
  * See https://api.slack.com/docs/message-formatting
- *
+ * <p>
  * Example JSON:
- *
- *  {
- *    "text": "I am a test message http://slack.com",
- *    "ts": "1358546515.000008",
- *    "user": "U2147483896",
- *    "attachments": [
- *       {
- *         "text": "And here's an attachment!"
- *       }
- *    ]
- *  }
- *
+ * <p>
+ * {
+ * "text": "I am a test message http://slack.com",
+ * "ts": "1358546515.000008",
+ * "user": "U2147483896",
+ * "attachments": [
+ * {
+ * "text": "And here's an attachment!"
+ * }
+ * ]
+ * }
  */
 
 public class Message {
 
+    List<Attachment> attachments;
     private String text;
     private String ts;
+    private String name;
     private String user;
-    List<Attachment> attachments;
+    private String response_type;
 
     public Message(JSONObject json) {
         if (json.get("text") != null) {
@@ -48,6 +49,14 @@ public class Message {
             this.user = (String) json.get("user");
         }
 
+        if (json.get("name") != null) {
+            this.name = (String) json.get("name");
+        }
+
+        if (json.get("response_type") != null) {
+            this.response_type = (String) json.get("response_type");
+        }
+
         if (json.get("attachments") != null) {
             JSONArray attachmentsArray = (JSONArray) json.get("attachments");
             this.attachments = new ArrayList<Attachment>();
@@ -55,7 +64,6 @@ public class Message {
                 this.attachments.add(new Attachment((JSONObject) attachmentsArray.get(i)));
             }
         }
-
     }
 
     public String getText() {
@@ -66,11 +74,20 @@ public class Message {
         return ts;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getUser() {
         return user;
+    }
+
+    public String getResponse_type() {
+        return response_type;
     }
 
     public List<Attachment> getAttachments() {
         return attachments;
     }
+
 }

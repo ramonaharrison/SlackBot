@@ -59,7 +59,7 @@ public class HTTPS {
      */
     public static JSONObject get(URL url) {
         try {
-            final HttpsURLConnection connection = (HttpsURLConnection)  url.openConnection();
+            final HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             final InputStreamReader reader = new InputStreamReader(connection.getInputStream());
             try {
                 return stringToJSON(readAll(reader));

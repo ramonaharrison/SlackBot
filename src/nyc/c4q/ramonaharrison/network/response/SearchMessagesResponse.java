@@ -7,20 +7,13 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ramona Harrison
- * on 8/26/16
- * <p>
- * A class representing the response from channels.history
- * See https://api.slack.com/methods/channels.history
- */
-
-public class ListMessagesResponse extends Response {
+// CANNOT SEARCH MESSAGES AS BOT. COULD NOT USE PUBLIC GENERATOR KEY
+public class SearchMessagesResponse extends Response {
 
     private List<Message> messages;
     private String user;
 
-    public ListMessagesResponse(JSONObject json) {
+    public SearchMessagesResponse(JSONObject json) {
         super(json);
 
         if (json.containsKey("messages")) {
@@ -33,7 +26,6 @@ public class ListMessagesResponse extends Response {
             this.messages = new ArrayList<Message>();
             for (int i = 0; i < 1; i++) {
                 this.messages.add(new Message((JSONObject) array.get(i)));
-
             }
         }
     }
@@ -46,3 +38,5 @@ public class ListMessagesResponse extends Response {
         return user;
     }
 }
+
+

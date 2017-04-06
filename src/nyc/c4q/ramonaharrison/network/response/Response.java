@@ -5,10 +5,9 @@ import org.json.simple.JSONObject;
 /**
  * Created by Ramona Harrison
  * on 8/26/16
- *
+ * <p>
  * A class representing a response from Slack's Web API.
  * See https://api.slack.com/methods/api.test
- *
  */
 
 public class Response {
@@ -33,4 +32,5 @@ public class Response {
     public String getError() {
         return error;
     }
+
 }
