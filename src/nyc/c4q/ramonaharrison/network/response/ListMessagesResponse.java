@@ -19,6 +19,7 @@ import java.util.List;
 public class ListMessagesResponse extends Response {
 
     private List<Message> messages;
+    private String user;
 
     public ListMessagesResponse(JSONObject json) {
         super(json);
@@ -26,8 +27,12 @@ public class ListMessagesResponse extends Response {
         if (json.containsKey("messages")) {
             JSONArray array = (JSONArray) json.get("messages");
 
+            if(json.containsKey("user")){
+                this.user= (String) json.get("user");
+            }
+
             this.messages = new ArrayList<Message>();
-            for (int i = 0; i < array.size(); i++) {
+            for (int i = 0; i < 1; i++) {
                 this.messages.add(new Message((JSONObject) array.get(i)));
             }
         }
@@ -35,5 +40,9 @@ public class ListMessagesResponse extends Response {
 
     public List<Message> getMessages() {
         return messages;
+    }
+
+    public String getUser() {
+        return user;
     }
 }
