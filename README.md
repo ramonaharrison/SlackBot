@@ -1,4 +1,4 @@
-# HW Week 3 - SLACK BOT CHALLENGE 🤖 !!!
+# Access Code 3.3 Slack Bot Challenge 🤖
 <br>
 A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app. Bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can preform simple interactions with the AccessCode3-3 Slack.
 
