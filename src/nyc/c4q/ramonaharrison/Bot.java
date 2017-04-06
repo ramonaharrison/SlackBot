@@ -98,4 +98,8 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+    public void getAnEvent (){
+        sendMessageToBotsChannel(TodayInHistory.getTodayInHistory().getRandomEvent().toString());
+    }
 }
