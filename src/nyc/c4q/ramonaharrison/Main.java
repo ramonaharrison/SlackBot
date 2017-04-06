@@ -1,24 +1,40 @@
 package nyc.c4q.ramonaharrison;
 
+import com.sun.tools.classfile.Opcode;
+import com.sun.tools.javac.util.List;
+import nyc.c4q.ramonaharrison.model.Attachment;
 import nyc.c4q.ramonaharrison.network.Slack;
+import nyc.c4q.ramonaharrison.util.Words;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Bot myBot = new Bot();
 
-        myBot.testApi();
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader("Attachment.json"));
+        JSONArray jsonObject = (JSONArray) obj;
 
-        myBot.listChannels();
+        //Slack.sendMessageWithAttachments(jsonObject);
 
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+       // myBot.pleaseBotv2();
+        myBot.replaceWord(Slack.BOTS_CHANNEL_ID);
 
-        // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessage("Hello, world!");
-
-        // Post a pineapple photo to the #bots channel
-        //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
 
     }
 }
