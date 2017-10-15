@@ -11,7 +11,7 @@ The following setup steps only need to be completed **once per team**:
 
 1. Fork and clone [this repo](https://github.com/ramonaharrison/SlackBot). Make sure both team members are added as contributors to the forked repo.
 
-2. Go to https://accesscode3-3.slack.com/apps/new/A0F7YS25R-bots. Make sure you are signed into the AccessCode3-3 Slack team. Choose a username for your bot and click the "Add bot integration" button.
+2. Go to ... Make sure you are signed into the AccessCode3-3 Slack team. Choose a username for your bot and click the "Add bot integration" button.
 
 3. Make a note of your **API token**. The token must always be kept in a **safe, secret** place. We will be storing our API keys in the `../SlackBot/api_token.txt` file, which has been added to our `.gitignore` file.
 
