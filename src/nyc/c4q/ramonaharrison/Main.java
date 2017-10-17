@@ -14,6 +14,8 @@ public class Main {
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
+
+
         // Post "Hello, world!" to the #bots channel
         //myBot.sendMessage("Hello, world!");
 
