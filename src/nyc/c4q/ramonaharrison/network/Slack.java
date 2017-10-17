@@ -21,7 +21,7 @@ import java.util.List;
 public class Slack {
 
     private static final String API_KEY = Token.findApiToken();
-    private static final String BASE_URL = "https://slack.com/api/";
+    private static final String BASE_URL = "https://c4q-accesscode-4-4.slack.com/services/B7JFZS2E7";
     private static final String ENDPOINT_TEST = "api.test";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
@@ -97,7 +97,23 @@ public class Slack {
     public static SendMessageResponse sendMessageWithAttachments(String messageText, List<Attachment> attachments) {
 
         // TODO (optional): implement this method! See https://api.slack.com/docs/message-attachments
-        throw new RuntimeException("Method not implemented!");
+
+        attachments.add(messageTex
+
+        message(attachments);
+
+        try {
+            messageText = URLEncoder.encode(messageText, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+
+
+
     }
 
     /**
