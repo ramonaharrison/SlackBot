@@ -21,7 +21,7 @@ import java.util.List;
 public class Slack {
 
     private static final String API_KEY = Token.findApiToken();
-    private static final String BASE_URL = "https://slack.com/api/";
+    private static final String BASE_URL = "https://c4q-accesscode-4-4.slack.com/services/B7JFZS2E7";
     private static final String ENDPOINT_TEST = "api.test";
     private static final String ENDPOINT_LIST_CHANNELS = "channels.list";
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
