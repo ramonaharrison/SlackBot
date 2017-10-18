@@ -2,16 +2,6 @@ package nyc.c4q.ramonaharrison.model;
 
 import org.json.simple.JSONObject;
 
-
-/**
- * Created by Ramona Harrison
- * on 8/26/16
- *
- * A class representing a user.
- * See https://api.slack.com/types/user
- *
- */
-
 public class User {
 
     private String id;
