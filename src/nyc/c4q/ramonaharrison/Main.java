@@ -14,11 +14,15 @@ public class Main {
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-        // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessage("Hello, world!");
+        myBot.sendMessageToBotsChannel("testing");
 
-        // Post a pineapple photo to the #bots channel
-        //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+//         Post "Hello, world!" to the #bots channel
+//        myBot.sendMessageToBotsChannel("Hello, world!");
+
+//         Post a pineapple photo to the #bots channel
+//        myBot.sendMessageToBotsChannel("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+
+//        myBot.sendMessageToBotsChannel("Shout out to vivian shantal murad and ashley!!!");
 
     }
 }

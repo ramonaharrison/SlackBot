@@ -4,4 +4,4 @@ out/
 *.class
 *.iml
 *.iws
-api_token.json
+/api_token.txt
