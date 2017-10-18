@@ -2,6 +2,8 @@ package nyc.c4q.ramonaharrison.model;
 
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
 /**
  * Created by Ramona Harrison
  * on 8/26/16
@@ -48,19 +50,19 @@ public class User {
             this.profile = (HashMap<String, String>) json.get("profile");
         }
         if (json.get("is_admin") != null){
-            this.is_admin = (String) json.get("is_admin");
+            this.is_admin = (Boolean) json.get("is_admin");
         }
         if (json.get("is_owner") != null){
-            this.is_owner = (String) json.get("is_owner");
+            this.is_owner = (Boolean) json.get("is_owner");
         }
         if (json.get("is_restricted") != null){
-            this.is_restricted = (String) json.get("is_restricted");
+            this.is_restricted = (Boolean) json.get("is_restricted");
         }
         if (json.get("is_ultra_restricted") != null){
-            this.is_ultra_restricted = (String) json.get("is_ultra_restricted");
+            this.is_ultra_restricted = (Boolean) json.get("is_ultra_restricted");
         }
         if (json.get("has_2fa") != null){
-            this.has_2fa = (String) json.get("has_2fa");
+            this.has_2fa = (Boolean) json.get("has_2fa");
         }
 
 
