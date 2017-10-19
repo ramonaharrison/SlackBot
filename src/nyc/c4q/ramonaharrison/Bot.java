@@ -2,9 +2,11 @@ package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
+import java.io.File;
 import java.util.List;
 
 /**
