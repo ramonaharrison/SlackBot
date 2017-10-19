@@ -2,6 +2,8 @@ package nyc.c4q.ramonaharrison.model;
 
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ramona Harrison
  * on 8/26/16
@@ -29,9 +31,27 @@ public class Attachment {
     // "footer"
     // "footer_icon"
     // "ts"
+    String fallback;
+    String color;
+    String pretext;
+    String author_name;
 
     public Attachment(JSONObject json) {
         // TODO: parse an attachment from the incoming json
+        if (json.get("fallback") != null) {
+            this.fallback = (String) json.get("fallback");
+        }
+        if (json.get("color") != null) {
+            this.color = (String) json.get("fallback");
+        }
+        if (json.get("pretext") != null) {
+            this.pretext = (String) json.get("fallback");
+        }
+        if (json.get("author_name") != null) {
+            this.author_name = (String) json.get("fallback");
+        }
+
+        //private List<Field> fields = new ArrayList<>();
     }
 
     // TODO add getters to access private fields
