@@ -35,31 +35,25 @@ public class Attachment {
     // "footer_icon"
     // "ts"
 
-    private ArrayList<Attachment> attachments;
         private String fallback;
         private String color;
         private String pretext;
         private String author_name;
         private String author_link;
-        private String authorIcon;
+        private String author_icon;
         private String title;
-        private String titleLink;
+        private String title_link;
         private String text;
 
-    private ArrayList<Field> fields;
-//        private String title1;   these are the elements of array, shall i define them as properties?
-//        private String value;
-//        private boolean short1;
+        private ArrayList<Field> fields;
 
-        private String imageUrl;
-        private String thumbUrl;
+        private String image_url;
+        private String thumb_url;
         private String footer;
-        private String footerIcon;
+        private String footer_icon;
         private long ts;
 
-        public class Fields {
 
-        }
 
     public Attachment(JSONObject json) {
         // TODO: parse an attachment from the incoming json
@@ -75,24 +69,24 @@ public class Attachment {
             this.pretext = (String) json.get("pretext");
         }
 
-        if (json.get("authorName") != null) {
-            this.authorName = (String) json.get("authorName");
+        if (json.get("author_name") != null) {
+            this.author_name = (String) json.get("author_name");
         }
 
-        if (json.get("authorLink") != null) {
-            this.authorLink = (String) json.get("authorLink");
+        if (json.get("author_link") != null) {
+            this.author_link = (String) json.get("author_link");
         }
 
-        if (json.get("authorIcon") != null) {
-            this.authorIcon = (String) json.get("authorIcon");
+        if (json.get("author_icon") != null) {
+            this.author_icon = (String) json.get("author_icon");
         }
 
         if (json.get("title") != null) {
             this.title = (String) json.get("title");
         }
 
-        if (json.get("titleLink") != null) {
-            this.titleLink = (String) json.get("titleLink");
+        if (json.get("title_link") != null) {
+            this.title_link = (String) json.get("title_link");
         }
 
         if (json.get("text") != null) {
@@ -107,20 +101,20 @@ public class Attachment {
             }
         }
 
-        if (json.get("imageUrl") != null) {
-            this.imageUrl = (String) json.get("imageUrl");
+        if (json.get("image_url") != null) {
+            this.image_url = (String) json.get("image_url");
         }
 
-        if (json.get("thumbUrl") != null) {
-            this.thumbUrl = (String) json.get("thumbUrl");
+        if (json.get("thumb_url") != null) {
+            this.thumb_url = (String) json.get("thumb_url");
         }
 
         if (json.get("footer") != null) {
             this.footer = (String) json.get("footer");
         }
 
-        if (json.get("footerIcon") != null) {
-            this.footerIcon = (String) json.get("footerIcon");
+        if (json.get("footer_icon") != null) {
+            this.footer_icon = (String) json.get("footer_icon");
         }
 
         if (json.get("ts") != null) {
@@ -144,14 +138,14 @@ public class Attachment {
     }
 
     public String getAuthorName() {
-        return authorName;
+        return author_name;
     }
 
     public String getAuthorLink() {
-        return authorLink;
+        return author_link;
     }
     public String getAuthorIcon() {
-        return authorIcon;
+        return author_icon;
     }
 
     public String getTitle() {
@@ -159,7 +153,7 @@ public class Attachment {
     }
 
     public String getTitleLink() {
-        return titleLink;
+        return title_link;
     }
 
     public String getText() {
@@ -170,24 +164,13 @@ public class Attachment {
         return fields;
     }
 
-//    private String getTitle1() {
-//        return title1;
-//    }
-//
-//    private String getValue() {
-//        return value;
-//    }
-//
-//    private boolean isShort1() {
-//        return short1;
-//    }
 
     private String getImageUrl() {
-        return imageUrl;
+        return image_url;
     }
 
     private String getThumbUrl() {
-        return thumbUrl;
+        return thumb_url;
     }
 
     private String getFooter() {
@@ -195,7 +178,7 @@ public class Attachment {
     }
 
     private String getFooterIcon() {
-        return footerIcon;
+        return footer_icon;
     }
 
     private long getTs() {
