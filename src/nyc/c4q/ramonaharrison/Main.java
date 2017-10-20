@@ -14,16 +14,21 @@ public class Main {
         myBot.testApi();
         myBot.listChannels();
 
+//        myBot.respondGreeting("@C7M6UM4LA");
+        myBot.respondGreeting("@C7M6UM4LA");
+        myBot.randomTip();
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-        myBot.sendMessageToBotsChannel(myBot.randomTip());
-        myBot.sendMessageToBotsChannel("Yum yum!");
-        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
+
+//        myBot.sendMessageToBotsChannel(list);
+//        myBot.sendMessageToBotsChannel(myBot.randomTip());
+//        myBot.sendMessageToBotsChannel("Yum yum!");
+//        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
 
 
         // Post "Hello, world!" to the #bots channel
-        myBot.sendMessageToBotsChannel("Testing, Testing");
+//        myBot.sendMessageToBotsChannel("Testing, Testing");
 
         // Post a pineapple photo to the #bots channel
         //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
