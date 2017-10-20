@@ -2,9 +2,12 @@ package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +20,31 @@ public class Bot {
     // TODO: implement your bot logic!
 
     public Bot() {
+    }
 
+    public void sendHomeworkLink() {
+        ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
+        List<Message> allMessages = allResponses.getMessages();
+        Message lastMessage = allMessages.get(allMessages.size() - 1);
+        String text = lastMessage.getText();
+        HashMap<String, String> listOfHomeworks = new HashMap<>();
+        listOfHomeworks.put("homework1", "a");
+        listOfHomeworks.put("homework2", "b");
+        listOfHomeworks.put("homework3", "b");
+
+
+        if (text.contains("homework1")) {
+            String link = listOfHomeworks.get("homework1");
+            Slack.sendMessage(link);
+        }
+        else if (text.contains("homework2")) {
+            String link = listOfHomeworks.get("homework2");
+            Slack.sendMessage(link);
+        }
+        else if (text.contains("homework3")) {
+            String link = listOfHomeworks.get("homework3");
+            Slack.sendMessage(link);
+        }
     }
 
     /**
