@@ -5,7 +5,9 @@ import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Ramona Harrison
@@ -16,7 +18,10 @@ import java.util.List;
 public class Bot {
     // TODO: implement your bot logic!
 
+    ArrayList<String> tips = new ArrayList<>();
+
     public Bot() {
+//    randomTip();
 
     }
 
@@ -98,4 +103,17 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+    public String randomTip () {
+        tips.add("Arrays have fixed size but ArrayLists have variable sizes. \n Since the size of Array is fixed, the memory gets allocated at the time of declaration of Array type variable. \n Hence, Arrays are very fast. ");
+        tips.add("To compute power (^), one way is to use the Math.pow");
+
+        Random r= new Random();
+
+
+        String tip=tips.get(r.nextInt(tips.size()));
+        return tip;
+    }
+
+
 }
