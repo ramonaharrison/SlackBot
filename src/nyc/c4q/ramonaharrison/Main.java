@@ -21,5 +21,8 @@ public class Main {
         myBot.sendMessageToBotsChannel("I have a name and face now!");
 
 
+        while (true) {
+            myBot.sendHomeworkLink();
+        }
     }
 }
