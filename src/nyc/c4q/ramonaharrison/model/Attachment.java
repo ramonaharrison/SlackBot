@@ -16,12 +16,19 @@ public class Attachment {
     // TODO: implement private fields for each of the following attachment JSON keys:
 
 
+
     public Attachment(JSONObject json) {
         // TODO: parse an attachment from the incoming json
+
+
+    public Attachment(JSONObject json) {
+        // TODO: parse an attachment from the incoming json
+     
 
     }
 
     // TODO add getters to access private fields
+
 
 
 }

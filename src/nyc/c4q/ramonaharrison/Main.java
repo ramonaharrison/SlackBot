@@ -15,7 +15,10 @@ public class Main {
         myBot.listChannels();
 
 
-//        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+
+       myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+
+       myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 
         myBot.sendMessageToBotsChannel(myBot.randomTip());
@@ -23,7 +26,7 @@ public class Main {
         myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
 
         // Post "Hello, world!" to the #bots channel
-        //myBot.sendMessage("Hello, world!");
+        myBot.sendMessageToBotsChannel("Testing, Testing");
 
         // Post a pineapple photo to the #bots channel
         //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
