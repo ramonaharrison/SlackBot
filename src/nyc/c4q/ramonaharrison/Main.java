@@ -1,5 +1,7 @@
 package nyc.c4q.ramonaharrison;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.Slack;
 
 public class Main {
@@ -13,6 +15,10 @@ public class Main {
         myBot.listChannels();
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+
+//        myBot.sendMessageToBotsChannel(" testing " );
+
+
 
         // Post "Hello, world!" to the #bots channel
         //myBot.sendMessage("Hello, world!");
