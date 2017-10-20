@@ -4,7 +4,10 @@ import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+import nyc.c4q.ramonaharrison.network.response.ListMessagesResponse.*;
+import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,10 +17,36 @@ import java.util.List;
  */
 
 public class Bot {
-    // TODO: implement your bot logic!
+
+    private String lastMessage;
+
+    private String lmgtfyLink;
+
 
     public Bot() {
+        //if listMessages(listMessages(id);
 
+    }
+    public String getLastMessage() {
+        return lastMessage;
+    }
+
+    public void setLmgtfyLink() {
+        if (lastMessage.contains("?")) {
+            String[] linkWords = lastMessage.split(" ");
+
+            for (String s : linkWords) {
+                if (s.equals(linkWords[linkWords.length - 1])) {
+                    lmgtfyLink += s;
+                } else {
+                    lmgtfyLink += s + "+";
+                }
+            }
+        }
+    }
+
+    public String getLmgtfyLink(){
+        return lmgtfyLink;
     }
 
     /**
@@ -52,8 +81,9 @@ public class Bot {
      *
      * @param channelId id of the given channel.
      */
-    public void listMessages(String channelId) {
+    public ArrayList<String> listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+        ArrayList<String> messageList = new ArrayList<>();
 
         if (listMessagesResponse.isOk()) {
             List<Message> messages = listMessagesResponse.getMessages();
@@ -63,10 +93,13 @@ public class Bot {
                 System.out.println();
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+                messageList.add(message.getText());
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
+        lastMessage = messageList.get(0);
+        return messageList;
     }
 
     /**
@@ -98,4 +131,6 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+
 }
