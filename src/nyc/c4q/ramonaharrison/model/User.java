@@ -16,9 +16,9 @@ import java.util.HashMap;
 public class User {
 
     // TODO: implement private fields for each of the following user JSON keys:
-    private String id;
+    private String id ;
     private String name;
-    private boolean deleted = false;
+    private boolean deleted = true;
     private String color ;
     private HashMap<String,String> profile = new HashMap<>();
     private boolean is_admin;
@@ -26,9 +26,11 @@ public class User {
     private boolean is_restricted;
     private boolean is_ultra_restricted;
     private boolean has_2fa;
-    private boolean two_factor_type;
-    private boolean has_files;
 
+
+    // "has_2fa"
+    // "two_factor_type"
+    // "has_files"
 
     public User(JSONObject json) {
         // TODO: parse a user from the incoming json
@@ -45,7 +47,20 @@ public class User {
             this.color = (String) json.get("color");
         }
         if (json.get("profile") != null){
-            this.profile = (HashMap<String, String>) json.get("profile");
+            JSONObject obj = (JSONObject) json.get("profile");
+            this.profile = obj;
+            System.out.println(obj);
+            /*
+            this.profile.put("avatar_hash",obj.getString("avatar_hash"));
+            this.profile.put("status_text",obj.getString("status_text"));
+            this.profile.put("status_emoji",obj.getString("status_emoji"));
+            this.profile.put("display_name",obj.getString("display_name"));
+            this.profile.put("real_name_normalized",obj.getString("real_name_normalized"));
+            this.profile.put("display_name_normalized",obj.gettring("display_name_normalized"));
+            this.profile.put("email",obj.getString("email"));
+            this.profile.put("team",obj.getString("team"));
+            */
+
         }
         if (json.get("is_admin") != null){
             this.is_admin = (Boolean) json.get("is_admin");
@@ -63,13 +78,17 @@ public class User {
             this.has_2fa = (Boolean) json.get("has_2fa");
         }
 
+
+
     }
 
     public String getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -78,47 +97,38 @@ public class User {
     }
 
     public String getColor() {
+
         return color;
     }
 
     public HashMap<String, String> getProfile() {
+
         return profile;
     }
 
     public boolean isIs_admin() {
+
         return is_admin;
     }
 
     public boolean isIs_owner() {
+
         return is_owner;
     }
 
     public boolean isIs_restricted() {
+
         return is_restricted;
     }
 
     public boolean isIs_ultra_restricted() {
+
         return is_ultra_restricted;
     }
 
     public boolean isHas_2fa() {
+
         return has_2fa;
-    }
-
-    public boolean isTwo_factor_type() {
-        return two_factor_type;
-    }
-
-    public void setTwo_factor_type(boolean two_factor_type) {
-        this.two_factor_type = two_factor_type;
-    }
-
-    public boolean isHas_files() {
-        return has_files;
-    }
-
-    public void setHas_files(boolean has_files) {
-        this.has_files = has_files;
     }
 
 }
