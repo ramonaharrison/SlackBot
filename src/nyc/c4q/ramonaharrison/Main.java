@@ -14,11 +14,8 @@ public class Main {
         myBot.testApi();
         myBot.listChannels();
 
-//        JSONParser parser = new JSONParser();
 
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-
-
+//        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
 
         myBot.sendMessageToBotsChannel(myBot.randomTip());
