@@ -21,7 +21,6 @@ public class Bot {
     ArrayList<String> tips = new ArrayList<>();
 
     public Bot() {
-//    randomTip();
 
     }
 
