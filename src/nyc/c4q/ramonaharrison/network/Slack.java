@@ -29,7 +29,7 @@ public class Slack {
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
-    public static final String BOTS_CHANNEL_ID = "C7KE0KTM4";
+    public static final String BOTS_CHANNEL_ID = "C7M6UM4LA";
 
 
     /**
