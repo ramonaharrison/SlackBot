@@ -59,6 +59,8 @@ public class Bot {
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
+        Bot myBot = new Bot();
+
         if (listMessagesResponse.isOk()) {
             List<Message> messages = listMessagesResponse.getMessages();
 
@@ -67,9 +69,39 @@ public class Bot {
                 System.out.println();
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+
+                String saySomething = message.getText();
+
+                if(saySomething.contains("candy")) {
+                    myBot.sendMessageToBotsChannel(randomTip());
+
+                }
+
+
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
+    }
+
+    public void respondGreeting(String channelId) {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+
+        if (listMessagesResponse.isOk()) {
+            List<Message> messages = listMessagesResponse.getMessages();
+
+            Bot myBot = new Bot();
+
+            for (Message message : messages) {
+
+                String saySomething = message.getText();
+
+                if (saySomething.contains("@U7JJ7B7K4") || saySomething.contains("candy")) {
+//                    myBot.sendMessageToBotsChannel("Hello");
+                    System.out.println(randomTip());
+
+                }
+            }
         }
     }
 
@@ -88,11 +120,11 @@ public class Bot {
         }
     }
 
-    /**
-     * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.
-     *
-     * @param messageTs unique timestamp of the message to be deleted.
-     */
+            /**
+             * Sample method: deletes a message from the #bots channel. Prints a message indicating success or failure.
+             *
+             * @param messageTs unique timestamp of the message to be deleted.
+             */
     public void deleteMessageInBotsChannel(String messageTs) {
         DeleteMessageResponse deleteMessageResponse = Slack.deleteMessage(messageTs);
 
@@ -103,6 +135,13 @@ public class Bot {
         }
     }
 
+<<<<<<< HEAD
+    public String randomTip () {
+
+        inspirationQuotes.add("cvbncn");
+        inspirationQuotes.add("pwertiowert");
+        inspirationQuotes.add("09645094609");
+=======
     public String randomQuote() {
         inspirationQuotes.add("If you have the opportunity to play this game of life \n " +
                                 "you need to appreciate every moment. \n" +
@@ -150,6 +189,7 @@ public class Bot {
         inspirationQuotes.add("Whatever you are, be a good one\n" +
                                 "-Abraham Lincoln");
 
+>>>>>>> cda13a2bd21a0090789c6efe97ba06dfc7e55298
 
         Random r= new Random();
 
