@@ -1,6 +1,5 @@
 package nyc.c4q.ramonaharrison;
 
-import jdk.nashorn.internal.parser.JSONParser;
 import nyc.c4q.ramonaharrison.network.Slack;
 
 
@@ -20,11 +19,17 @@ public class Main {
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
+<<<<<<< HEAD
 
 //        myBot.sendMessageToBotsChannel(list);
 //        myBot.sendMessageToBotsChannel(myBot.randomTip());
 //        myBot.sendMessageToBotsChannel("Yum yum!");
 //        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
+=======
+        myBot.sendMessageToBotsChannel(myBot.randomQuote());
+        myBot.sendMessageToBotsChannel("Yum yum!");
+        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
+>>>>>>> cda13a2bd21a0090789c6efe97ba06dfc7e55298
 
 
         // Post "Hello, world!" to the #bots channel
