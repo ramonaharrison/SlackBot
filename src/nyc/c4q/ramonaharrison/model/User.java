@@ -47,7 +47,20 @@ public class User {
             this.color = (String) json.get("color");
         }
         if (json.get("profile") != null){
-            this.profile = (HashMap<String, String>) json.get("profile");
+            JSONObject obj = (JSONObject) json.get("profile");
+            this.profile = obj;
+            System.out.println(obj);
+            /*
+            this.profile.put("avatar_hash",obj.getString("avatar_hash"));
+            this.profile.put("status_text",obj.getString("status_text"));
+            this.profile.put("status_emoji",obj.getString("status_emoji"));
+            this.profile.put("display_name",obj.getString("display_name"));
+            this.profile.put("real_name_normalized",obj.getString("real_name_normalized"));
+            this.profile.put("display_name_normalized",obj.gettring("display_name_normalized"));
+            this.profile.put("email",obj.getString("email"));
+            this.profile.put("team",obj.getString("team"));
+            */
+
         }
         if (json.get("is_admin") != null){
             this.is_admin = (Boolean) json.get("is_admin");
@@ -70,10 +83,12 @@ public class User {
     }
 
     public String getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -82,30 +97,37 @@ public class User {
     }
 
     public String getColor() {
+
         return color;
     }
 
     public HashMap<String, String> getProfile() {
+
         return profile;
     }
 
     public boolean isIs_admin() {
+
         return is_admin;
     }
 
     public boolean isIs_owner() {
+
         return is_owner;
     }
 
     public boolean isIs_restricted() {
+
         return is_restricted;
     }
 
     public boolean isIs_ultra_restricted() {
+
         return is_ultra_restricted;
     }
 
     public boolean isHas_2fa() {
+
         return has_2fa;
     }
 
