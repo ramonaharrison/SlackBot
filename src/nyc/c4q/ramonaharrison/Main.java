@@ -14,7 +14,7 @@ public class Main {
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-        myBot.sendMessageToBotsChannel("TEST");
+        myBot.sendMessageToBotsChannel("test");
 
 
     }
