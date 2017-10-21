@@ -104,6 +104,8 @@ public class Bot {
      * @param text message text.
      */
     public void sendMessageToBotsChannel(String text) {
+        PigLatin pigMessage= new PigLatin(text);
+        text=pigMessage.getPigMessage();
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
 
         if (sendMessageResponse.isOk()) {
@@ -127,9 +129,10 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
-    public class PigLatin{
+    public static class PigLatin{
+        String pigMessage;
         public PigLatin(String pigMessage){
-            pigMessage = messageToPigLatin(messageToStringArray(pigMessage));
+            this.pigMessage = messageToPigLatin(messageToStringArray(pigMessage));
         }
         public StringBuilder pigLatin(String s){
             StringBuilder pigLatin=new StringBuilder(s);
@@ -153,6 +156,10 @@ public class Bot {
                 messageToPigLatin+= (pigLatin(s) + " ");
             }
             return messageToPigLatin;
+        }
+
+        public String getPigMessage() {
+            return pigMessage;
         }
     }
 }
