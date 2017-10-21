@@ -53,9 +53,10 @@ public class Message {
             this.attachments = new ArrayList<Attachment>();
             for (int i = 0; i < attachmentsArray.size(); i++) {
                 this.attachments.add(new Attachment((JSONObject) attachmentsArray.get(i)));
-            }
-        }
 
+            }
+
+        }
     }
 
     public String getText() {

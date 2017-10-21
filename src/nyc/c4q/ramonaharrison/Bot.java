@@ -1,11 +1,12 @@
 package nyc.c4q.ramonaharrison;
-
+import java.util.*;
+import java.net.*;
 import nyc.c4q.ramonaharrison.model.Channel;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Ramona Harrison
@@ -15,14 +16,60 @@ import java.util.List;
 
 public class Bot {
     // TODO: implement your bot logic!
+    private static HashMap <Character, String> keyWords;
 
     public Bot() {
 
+        sendMessageToBotsChannel("Fancy");
+        //listMessages("bots");
+
     }
+
+
 
     /**
      * Sample method: tests the Slack API. Prints a message indicating success or failure.
      */
+
+
+    public class Keywords  {
+
+        public Keywords(){
+            addWord("sad");
+            addWord("happy");
+            addWord("anxious");
+            addWord("content");
+            addWord("hurt");
+            addWord("insulted");
+            addWord("lyrical");
+        }
+
+        private HashMap<Character, ArrayList<String>>words = new HashMap<>();
+
+        private char getFirstLetter(String string){
+            char[] word = string.toCharArray();
+            return word[1];
+        }
+
+        private void addWord(String string){
+            if(words.containsKey(getFirstLetter(string))) {
+                words.get(getFirstLetter(string)).add(string);
+            } else {
+                ArrayList<String> thisLetter = new ArrayList();
+                thisLetter.add(string);
+                words.put(getFirstLetter(string),thisLetter);
+            }
+        }
+
+        private boolean searchFor(String string){
+            return words.get(getFirstLetter(string)).contains(string);
+        }
+    }
+
+
+
+
+
     public void testApi() {
         Response apiTest = Slack.testApi();
         System.out.println("API OK: " +apiTest.isOk() + "\n");
