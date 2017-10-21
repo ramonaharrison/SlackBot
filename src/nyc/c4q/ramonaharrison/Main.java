@@ -14,22 +14,21 @@ public class Main {
         myBot.listChannels();
 
 //        myBot.respondGreeting("@C7M6UM4LA");
-        myBot.respondGreeting("@C7M6UM4LA");
-        myBot.randomTip();
+        myBot.respond("@C7M6UM4LA");
+
 
         myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-<<<<<<< HEAD
+
 
 //        myBot.sendMessageToBotsChannel(list);
 //        myBot.sendMessageToBotsChannel(myBot.randomTip());
 //        myBot.sendMessageToBotsChannel("Yum yum!");
 //        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
-=======
-        myBot.sendMessageToBotsChannel(myBot.randomQuote());
-        myBot.sendMessageToBotsChannel("Yum yum!");
-        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
->>>>>>> cda13a2bd21a0090789c6efe97ba06dfc7e55298
+
+//        myBot.sendMessageToBotsChannel(myBot.randomQuote());
+//        myBot.sendMessageToBotsChannel("Yum yum!");
+//        myBot.sendMessageToBotsChannel("So does this one: <http://www.foo.com|www.foo.com>");
 
 
         // Post "Hello, world!" to the #bots channel
