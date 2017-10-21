@@ -18,7 +18,8 @@ public class Main {
         //myBot.sendMessage("Hello, world!");
 
         // Post a pineapple photo to the #bots channel
-        myBot.sendMessageToBotsChannel("I speak in pigLatin now. English is totally lame");
+        //myBot.sendMessageToBotsChannel("I speak in pigLatin now. English is totally lame");
+        myBot.sendPigLatinResponse();
 
 
        // while (true) {

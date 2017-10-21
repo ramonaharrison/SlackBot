@@ -22,7 +22,15 @@ public class Bot {
 
     public Bot() {
     }
-
+    public void sendPigLatinResponse(){
+        ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
+        List<Message> allMessages = allResponses.getMessages();
+        Message lastMessage = allMessages.get(0);
+        String text = lastMessage.getText();
+        PigLatin pigMessage= new PigLatin(text);
+        text=pigMessage.getPigMessage();
+        sendMessageToBotsChannel(text);
+    }
     public void sendHomeworkLink() {
         ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
         List<Message> allMessages = allResponses.getMessages();
@@ -93,6 +101,7 @@ public class Bot {
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
             }
+
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
@@ -104,8 +113,7 @@ public class Bot {
      * @param text message text.
      */
     public void sendMessageToBotsChannel(String text) {
-        PigLatin pigMessage= new PigLatin(text);
-        text=pigMessage.getPigMessage();
+
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
 
         if (sendMessageResponse.isOk()) {
