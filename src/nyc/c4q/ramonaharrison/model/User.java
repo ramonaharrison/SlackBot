@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 public class User {
     private String userInput;
 
-
+    //TODO @ Muhaimen and Tati- all the fields arent declared an implement. Also the piglatin logic doesnt seem to belong here and is already implemented in the Bot.java file.
     // TODO: implement private fields for each of the following user JSON keys:
     private String id;   // "id"
     private String pigLatin;   // "name"

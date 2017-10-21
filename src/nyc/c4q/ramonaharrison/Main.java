@@ -19,6 +19,7 @@ public class Main {
 
         // Post a pineapple photo to the #bots channel
         //myBot.sendMessageToBotsChannel("I speak in pigLatin now. English is totally lame");
+
         myBot.sendPigLatinResponse();
 
 

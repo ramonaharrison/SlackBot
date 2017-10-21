@@ -29,7 +29,9 @@ public class Bot {
         String text = lastMessage.getText();
         PigLatin pigMessage= new PigLatin(text);
         text=pigMessage.getPigMessage();
-        sendMessageToBotsChannel(text);
+        while(Slack.listMessages("C7KE0KTM4").isOk()) {
+            sendMessageToBotsChannel(text);
+        }//TODO make an if statement to trigger response so bot doesn't spam replies to every message.
     }
     public void sendHomeworkLink() {
         ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
