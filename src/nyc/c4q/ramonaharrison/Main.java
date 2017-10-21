@@ -2,6 +2,8 @@ package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.network.Slack;
 
+import java.util.Random;
+
 public class Main {
 
     public static void main(String[] args) {
