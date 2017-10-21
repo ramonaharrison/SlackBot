@@ -20,6 +20,7 @@ import java.util.List;
 
 public class Slack {
 
+    public static final boolean as_user= true;
     private static final String API_KEY = Token.findApiToken();
     private static final String BASE_URL = "https://slack.com/api/";
     private static final String ENDPOINT_TEST = "api.test";
@@ -28,7 +29,8 @@ public class Slack {
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
 
-    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String BOTS_CHANNEL_ID = "C7M6UM4LA";
+
 
     /**
      * Static method to test the Slack API.
@@ -82,7 +84,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText+"&as_user="+as_user);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }

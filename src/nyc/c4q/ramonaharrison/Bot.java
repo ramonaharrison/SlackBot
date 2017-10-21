@@ -5,7 +5,9 @@ import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Ramona Harrison
@@ -15,6 +17,8 @@ import java.util.List;
 
 public class Bot {
     // TODO: implement your bot logic!
+
+    ArrayList<String> inspirationQuotes = new ArrayList<>();
 
     public Bot() {
 
@@ -82,6 +86,7 @@ public class Bot {
         } else {
             System.err.print("Error sending message: " + sendMessageResponse.getError());
         }
+
     }
 
     /**
@@ -98,4 +103,61 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+    public String randomQuote() {
+        inspirationQuotes.add("If you have the opportunity to play this game of life \n " +
+                                "you need to appreciate every moment. \n" +
+                                "A lot of people don't appreciate the moment until it's passed.\n" +
+                                        "-Kanye West");
+        inspirationQuotes.add("Do not dwell in the past, do not dream of the future.\n" +
+                                "Concentrate the mind on the present moment\n" +
+                                    "-Buddha");
+        inspirationQuotes.add("Try to be a rainbow in someone's cloud\n -Maya Angelou");
+        inspirationQuotes.add("Sometimes when you innovate, you make mistakes.\n" +
+                                "It is best to admit them quickly, and get on with improving your other innovations\n" +
+                                    "-Steve Jobs");
+        inspirationQuotes.add("People say nothing is impossible, but I do nothing everyday.\n" +
+                                    "-A.A. Milne");
+        inspirationQuotes.add("A diamond is merely a lump of coal that did well under pressure\n" +
+                                "-Unknown");
+        inspirationQuotes.add("No one can make you feel inferior without your consent\n" +
+                                "-Eleanor Roosevelt");
+        inspirationQuotes.add("Believe you can and you're halfway there\n" +
+                                "-T. Roosevelt");
+        inspirationQuotes.add("Don't sweat the petty things and don't pet the sweaty things.\n" +
+                                "-George Carlin");
+        inspirationQuotes.add("There isn't a way things should be. There's just what happens and what we do.\n" +
+                                "-Terry Pratchett");
+        inspirationQuotes.add("More fuck yeah, less fuck that.\n" +
+                                "-Unknown");
+        inspirationQuotes.add("Turn your wounds into wisdom\n" +
+                                "-Oprah");
+        inspirationQuotes.add("Hope is a waking dream\n" +
+                                "-Aristotle");
+        inspirationQuotes.add("Life is trying things to see if they work\n" +
+                                "-Ray Bradbury");
+        inspirationQuotes.add("The obstacle is the path\n" +
+                                "-Unknown");
+        inspirationQuotes.add("We become what we think about\n" +
+                                "-Earl Nightingale");
+        inspirationQuotes.add("It does not matter how slowly you go as long as you do not stop\n" +
+                                "-Confucius");
+        inspirationQuotes.add("A jug fills drop by drop\n" +
+                                "-Buddha");
+        inspirationQuotes.add("Don't regret the past, just learn from it\n" +
+                                "-Ben Ipock");
+        inspirationQuotes.add("Action is the foundational key to all success\n" +
+                                "-Pablo Picasso");
+        inspirationQuotes.add("Whatever you are, be a good one\n" +
+                                "-Abraham Lincoln");
+
+
+        Random r= new Random();
+
+
+        String quote= inspirationQuotes.get(r.nextInt(inspirationQuotes.size()));
+        return quote;
+    }
+
+
 }

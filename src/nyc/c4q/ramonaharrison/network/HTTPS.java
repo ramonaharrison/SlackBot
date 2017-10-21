@@ -18,7 +18,10 @@ public class HTTPS {
 
     /**
      * Reads from 'reader' by 'blockSize' until end-of-stream, and returns its complete contents.
+     *
      */
+
+
     private static String readAll(InputStreamReader reader, int blockSize) throws IOException {
         final char buffer[] = new char[blockSize];
         StringBuilder builder = new StringBuilder();
