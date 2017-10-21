@@ -21,6 +21,7 @@ public class SendMessageResponse extends Response {
     public SendMessageResponse(JSONObject json) {
         super(json);
 
+
         if (json.get("channel") != null) {
             this.channel = (String) json.get("channel");
         }
@@ -32,6 +33,7 @@ public class SendMessageResponse extends Response {
         if (json.get("message") != null) {
             this.message = new Message((JSONObject) json.get("message"));
         }
+
     }
 
     public String getChannel() {
