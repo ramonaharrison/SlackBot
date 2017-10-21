@@ -18,11 +18,11 @@ public class Main {
         //myBot.sendMessage("Hello, world!");
 
         // Post a pineapple photo to the #bots channel
-        myBot.sendMessageToBotsChannel("");
+        myBot.sendMessageToBotsChannel("I speak in pigLatin now. English is totally lame");
 
 
-        while (true) {
-            myBot.sendHomeworkLink();
-        }
+       // while (true) {
+           // myBot.sendHomeworkLink();
+        //}
     }
 }
