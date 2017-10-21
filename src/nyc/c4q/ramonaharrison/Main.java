@@ -26,6 +26,8 @@ public class Main {
 
         myBot.sendMessageToBotsChannel(link);
 
+        myBot.searchId();
+
 
     }
 
