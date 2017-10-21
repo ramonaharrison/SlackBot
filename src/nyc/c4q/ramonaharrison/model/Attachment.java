@@ -18,25 +18,6 @@ import java.util.ArrayList;
 
 public class Attachment {
 
-    // TODO: implement private fields for each of the following attachment JSON keys:
-    // "fallback"
-    // "color"
-    // "pretext"
-    // "author_name"
-    // "author_link"
-    // "author_icon"
-    // "title"
-    // "title_link"
-    // "text"
-    // "fields"
-    // "image_url"
-    // "thumb_url"
-    // "footer"
-    // "footer_icon"
-    // "ts"
-
-
-
     private String fallback;
     private String color;
     private String pretext;
@@ -46,19 +27,15 @@ public class Attachment {
     private String title;
     private String title_link;
     private String text;
-
     private ArrayList<Field> fields;
-
     private String image_url;
     private String thumb_url;
     private String footer;
     private String footer_icon;
     private long ts;
 
-
-
     public Attachment(JSONObject json) {
-        // TODO: parse an attachment from the incoming json
+
         if (json.get("fallback") != null) {
             this.fallback = (String) json.get("fallback");
         }
