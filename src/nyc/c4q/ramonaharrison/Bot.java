@@ -20,11 +20,9 @@ public class Bot {
 
     private String lastMessage;
 
-    private String lmgtfyLink;
-
+    private String lmgtfyLink = "No questions huh?";
 
     public Bot() {
-        //if listMessages(listMessages(id);
 
     }
     public String getLastMessage() {
@@ -33,6 +31,7 @@ public class Bot {
 
     public void setLmgtfyLink() {
         if (lastMessage.contains("?")) {
+            lmgtfyLink = "http://lmgtfy.com/?q=";
             String[] linkWords = lastMessage.split(" ");
 
             for (String s : linkWords) {
@@ -42,10 +41,12 @@ public class Bot {
                     lmgtfyLink += s + "+";
                 }
             }
+            sendMessageToBotsChannel(lmgtfyLink);
         }
     }
 
     public String getLmgtfyLink(){
+
         return lmgtfyLink;
     }
 
@@ -109,7 +110,6 @@ public class Bot {
      */
     public void sendMessageToBotsChannel(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
-
         if (sendMessageResponse.isOk()) {
             System.out.println("Message sent successfully!");
         } else {

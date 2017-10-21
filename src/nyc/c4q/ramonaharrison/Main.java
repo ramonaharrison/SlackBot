@@ -18,11 +18,9 @@ public class Main {
 
         myBot.listChannels();
 
-        //myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
 
-        ArrayList<String> myMessages = myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-
-        String lastmessage =  myBot.getLastMessage();
+        myBot.setLmgtfyLink();
 
         String link = myBot.getLmgtfyLink();
 
@@ -30,8 +28,6 @@ public class Main {
 
 
     }
-
-
 
 
     }
