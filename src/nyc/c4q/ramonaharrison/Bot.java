@@ -9,6 +9,7 @@ import nyc.c4q.ramonaharrison.network.response.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by Ramona Harrison
@@ -79,6 +80,7 @@ public class Bot {
      *
      * @param channelId id of the given channel.
      */
+
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
@@ -123,6 +125,34 @@ public class Bot {
             System.out.println("Message deleted successfully!");
         } else {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
+        }
+    }
+    public class PigLatin{
+        public PigLatin(String pigMessage){
+            pigMessage = messageToPigLatin(messageToStringArray(pigMessage));
+        }
+        public StringBuilder pigLatin(String s){
+            StringBuilder pigLatin=new StringBuilder(s);
+            String igLatin=pigLatin.substring(1);
+            pigLatin.delete(1,pigLatin.length());
+            pigLatin.insert(0, igLatin);
+            pigLatin.append("ay");
+            return pigLatin;
+        }
+        public ArrayList<String> messageToStringArray(String s){
+            ArrayList<String> stringArray= new ArrayList<>();
+            StringTokenizer pLT = new StringTokenizer(s, " ");
+            while (pLT.hasMoreTokens()){
+                stringArray.add(pLT.nextToken());
+            }
+            return stringArray;
+        }
+        public  String messageToPigLatin(ArrayList<String> message){
+            String messageToPigLatin="";
+            for (String s:message){
+                messageToPigLatin+= (pigLatin(s) + " ");
+            }
+            return messageToPigLatin;
         }
     }
 }

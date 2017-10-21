@@ -18,7 +18,7 @@ public class Main {
         //myBot.sendMessage("Hello, world!");
 
         // Post a pineapple photo to the #bots channel
-        myBot.sendMessageToBotsChannel("I have a name and face now!");
+        myBot.sendMessageToBotsChannel("");
 
 
         while (true) {
