@@ -27,8 +27,8 @@ public class Slack {
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
-
-    public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String BOTS_CHANNEL_ID = "C7KE0KTM4";
+    public static String asUser= "true";
 
     /**
      * Static method to test the Slack API.
@@ -82,8 +82,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
-
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText + "&as_user=" + asUser);
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }
 

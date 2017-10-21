@@ -1,10 +1,15 @@
 package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
+import nyc.c4q.ramonaharrison.network.response.ListMessagesResponse.*;
+import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,10 +19,67 @@ import java.util.List;
  */
 
 public class Bot {
-    // TODO: implement your bot logic!
+
+    private String lastMessage;
+
+    private String lmgtfyLink = "No questions huh?";
+
+
+
 
     public Bot() {
 
+    }
+    public String getLastMessage() {
+        return lastMessage;
+    }
+
+    public void searchId(){
+        String googlebot = "U7J309257";
+        ArrayList<String> msgs = listMessages(Slack.BOTS_CHANNEL_ID);
+        for (String s:msgs){
+            if (s.contains(googlebot)){
+                lmgtfyLink= "http://lmgtfy.com/?q=";
+                String[] linkWords = s.split(" ");
+                List<String> searchTerms = Arrays.asList(linkWords).subList(1, linkWords.length);
+
+                for (String y : searchTerms) {
+                    if (y.equals(searchTerms.get(searchTerms.size()-1))) {
+                        lmgtfyLink += y;
+                    } else {
+                        lmgtfyLink += y + "+";
+                    }
+                }
+                sendMessageToBotsChannel(lmgtfyLink);
+
+
+            }
+        }
+    }
+
+    public void setLmgtfyLink() {
+        //loop through last 100 messages
+        //if our bot id comes up we want to check the string after the id
+        //search that term
+        //
+        if (lastMessage.contains("?")) {
+            lmgtfyLink = "http://lmgtfy.com/?q=";
+            String[] linkWords = lastMessage.split(" ");
+
+            for (String s : linkWords) {
+                if (s.equals(linkWords[linkWords.length - 1])) {
+                    lmgtfyLink += s;
+                } else {
+                    lmgtfyLink += s + "+";
+                }
+            }
+            sendMessageToBotsChannel(lmgtfyLink);
+        }
+    }
+
+    public String getLmgtfyLink(){
+
+        return lmgtfyLink;
     }
 
     /**
@@ -52,8 +114,9 @@ public class Bot {
      *
      * @param channelId id of the given channel.
      */
-    public void listMessages(String channelId) {
+    public ArrayList<String> listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+        ArrayList<String> messageList = new ArrayList<>();
 
         if (listMessagesResponse.isOk()) {
             List<Message> messages = listMessagesResponse.getMessages();
@@ -63,10 +126,13 @@ public class Bot {
                 System.out.println();
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+                messageList.add(message.getText());
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
         }
+        lastMessage = messageList.get(0);
+        return messageList;
     }
 
     /**
@@ -76,7 +142,6 @@ public class Bot {
      */
     public void sendMessageToBotsChannel(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
-
         if (sendMessageResponse.isOk()) {
             System.out.println("Message sent successfully!");
         } else {
@@ -98,4 +163,6 @@ public class Bot {
             System.err.print("Error sending message: " + deleteMessageResponse.getError());
         }
     }
+
+
 }

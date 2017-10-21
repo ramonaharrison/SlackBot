@@ -15,9 +15,9 @@ public class Token {
 
     public static String findApiToken() {
 
-        String apiKey = "";
+        String apiKey = "api_token.txt";
 
-        File file = new File("api_token.txt");
+        File file = new File(apiKey);
         System.out.println(file.getAbsolutePath());
 
         try {
