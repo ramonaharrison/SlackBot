@@ -1,10 +1,15 @@
 # Access Code 3.3 - Slack Bot Challenge 🤖
 <br>
-A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app. Bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can preform simple interactions with the AccessCode3-3 Slack.
+A [Slack bot](https://api.slack.com/bot-users) is a non-human "user" that interacts with the Slack messaging app.
+Bots might post messages to users or to channels, send reminders, look up information in response to a question or perform a calculation.  In this project, we'll work in teams to build bots that can preform simple interactions with the AccessCode3-3 Slack.
 
 ![slack bot example](https://api.slack.com/img/api/guide_bot_user.png)
 
-Slack offers three different APIs that developers can use to interact with their service: the Web API, the Real Time Messaging API and the Events API . In this project, bots will only interact using the [Web API](https://api.slack.com/web). The Web API offers methods that can be used to list AccessCode3-3 channels, view message history on a given channel, and post and delete messages on the #bots channel.
+Slack offers three different APIs that developers can use to interact with their service: the Web API, the Real Time Messaging
+API and the Events API . In this project, bots will only interact using the [Web API](https://api.slack.com/web).
+The Web API offers methods that can be used to list AccessCode3-3 channels, view message history on a given channel, and
+post and delete messages on the #bots channel.
+
 <br>
 ## Setup
 The following setup steps only need to be completed **once per team**:
@@ -13,12 +18,14 @@ The following setup steps only need to be completed **once per team**:
 
 2. Go to https://accesscode3-3.slack.com/apps/new/A0F7YS25R-bots. Make sure you are signed into the AccessCode3-3 Slack team. Choose a username for your bot and click the "Add bot integration" button.
 
-3. Make a note of your **API token**. The token must always be kept in a **safe, secret** place. We will be storing our API keys in the `../SlackBot/api_token.txt` file, which has been added to our `.gitignore` file.
+3. Make a note of your **API token**. The token must always be kept in a **safe, secret** place. We will be storing our API keys in the
+`../SlackBot/api_token.txt` file, which has been added to our `.gitignore` file.
 
     > Always be careful when sharing API tokens! Be careful to never publish
 > our bot user tokens in any public GitHub code repository.
 
-4. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does. When you are finished, click the "Save Integration" button.
+4. Complete your bot's profile. Add an avatar image/emoji, a first and last name and a description of what your bot does.
+When you are finished, click the "Save Integration" button.
 
 5. **Both team members:** join the #bots channel on Slack so you can see what your bot is up to. 
 
@@ -26,16 +33,20 @@ The following setup steps only need to be completed **once per team**:
 1. Form a clear picture of the project requirements. Spend some time reading through:
     - This readme doc.
     - The [Slack Web API docs](https://api.slack.com/web) and [Basic message formatting guidelines](https://api.slack.com/docs/message-formatting).
-    - The code that has been provided in the `SlackBot` project -- particulary the Slack.java class, which provides methods that your bot can use to interact with Slack's Web API.
+    - The code that has been provided in the `SlackBot` project -- particulary the Slack.java class, which provides
+    methods that your bot can use to interact with Slack's Web API.
     - Use the IntelliJ TODO panel (⌘6) to navigate to each of the project TODOs.
 
-2. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object. Each team member should be responsible for parsing at least one of the classes:
+2. For both of the following Slack API JSON objects, write a Java class to parse and represent it as a Java object.
+Each team member should be responsible for parsing at least one of the classes:
     - [user](https://api.slack.com/types/user) -> User.java
     - [attachment](https://api.slack.com/docs/message-attachments) -> Attachment.java
 
-    Attachment.java and User.java files are already provided in the `model` subpackage -- just complete the TODOs as marked. See the Channel.java class for an example of how your completed classes should look.
+    Attachment.java and User.java files are already provided in the `model` subpackage -- just complete the TODOs as marked.
+    See the Channel.java class for an example of how your completed classes should look.
 
-3. In Bot.java, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum, when your program runs it should post a message with some content to the #bots channel. See below for some ideas.
+3. In Bot.java, design and implement your bot code! It's up to your team to decide what your bot does, but at a minimum,
+when your program runs it should post a message with some content to the #bots channel. See below for some ideas.
 
 4. (Optional / Bonus!) In `Slack.java`, implement the `sendMessageWithAttachments(String messageText, List<Attachment> attachments)`, which should take in a `String messageText` and a `List<Attachment> attachments` to post to the #bots channel. It should return a `SendMessageResponse`. If your bot will send messages with attachments, you must implement this method. Read https://api.slack.com/docs/message-attachments to familiarize yourself with how attachment URL parameters should be formatted.
 
