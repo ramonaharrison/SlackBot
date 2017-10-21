@@ -23,14 +23,21 @@ public class Bot {
     public Bot() {
     }
     public void sendPigLatinResponse(){
-        ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
-        List<Message> allMessages = allResponses.getMessages();
-        Message lastMessage = allMessages.get(0);
-        String text = lastMessage.getText();
-        PigLatin pigMessage= new PigLatin(text);
-        text=pigMessage.getPigMessage();
-        while(Slack.listMessages("C7KE0KTM4").isOk()) {
-            sendMessageToBotsChannel(text);
+
+
+
+            ListMessagesResponse allResponses = Slack.listMessages("C7KE0KTM4");
+            List<Message> allMessages = allResponses.getMessages();
+            Message lastMessage = allMessages.get(0);
+            String text = lastMessage.getText();
+        while(!allResponses.getMessages().isEmpty()) {
+            if (text.contains("<@U7JJ7S534>")) {
+                text=text.substring(11);
+                PigLatin pigMessage = new PigLatin(text);
+                text = pigMessage.getPigMessage();
+                sendMessageToBotsChannel(text);
+            }
+
         }//TODO make an if statement to trigger response so bot doesn't spam replies to every message.
     }
     public void sendHomeworkLink() {
