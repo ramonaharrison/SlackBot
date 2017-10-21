@@ -121,6 +121,7 @@ public class Bot {
         } else {
             System.err.print("Error sending message: " + sendMessageResponse.getError());
         }
+
     }
 
     /**
