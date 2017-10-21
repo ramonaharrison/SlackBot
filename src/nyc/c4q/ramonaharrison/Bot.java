@@ -55,6 +55,38 @@ public class Bot {
     public void listMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
+        if (uText.contains("Hi ")) {
+            botSay("How are you ?");
+        } else if (uText.contains("how are you")) {
+            int decider = (int) (Math.random() * 2 + 1);
+            if (decider == 1) {
+                botSay("I'm doing well, thanks");
+            } else if (decider == 2) {
+                botSay("Not too bad");
+            }
+            else if (uText.contains("fuck")){
+                int ranNumber = (int) (Math.random() * 3 + 1);
+                if (ranNumber == 1) {
+                    botSay("eveything will be okay! ");
+                } else if (ranNumber == 2) {
+                    botSay("No fuck you man !");
+                } else if (ranNumber == 3) {
+                    botSay(" I will try to be calm towards you !");
+                }
+
+            }
+
+        } else {
+            int ranNumber = (int) (Math.random() * 3 + 1);
+            if (ranNumber == 1) {
+                botSay("what are you trying to say ? ");
+            } else if (ranNumber == 2) {
+                botSay("say it again!");
+            } else if (ranNumber == 3) {
+                botSay("Huh ?????");
+            }
+        }
+
         if (listMessagesResponse.isOk()) {
             List<Message> messages = listMessagesResponse.getMessages();
 
