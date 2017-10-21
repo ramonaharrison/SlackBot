@@ -18,7 +18,11 @@ public class Main {
         //myBot.sendMessage("Hello, world!");
 
         // Post a pineapple photo to the #bots channel
-        //myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+        myBot.sendMessageToBotsChannel("");
 
+
+        while (true) {
+            myBot.sendHomeworkLink();
+        }
     }
 }
